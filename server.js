@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 //Create Routes
-//const routes = require("./routes");
+const routes = require("./routes");
 
 //Require Table Models for MySQL Database
 let db = require("./models");
@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 //Routes
-//app.use(routes);
+app.use(routes);
 
 //Sync Options for MySQL
 const syncOptions = { force: false };
