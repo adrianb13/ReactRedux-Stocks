@@ -7,7 +7,7 @@ const app = express();
 const routes = require("./routes");
 
 //Require Table Models for MySQL Database
-let db = require("./models");
+const db = require("./models/index");
 
 //Express uses only static assets in production
 if(process.env.NODE_ENV === "production") {
@@ -32,7 +32,7 @@ app.get("*", function(req, res){
 
 //Connection to Server as well as MySQL
 db.sequelize.sync(syncOptions).then(() => {
-  app.listen(PORT, function() {
+  app.listen(PORT, () => {
     console.log(`🌎 ==> API server now on port http://localhost:${PORT}`);
   });
 });

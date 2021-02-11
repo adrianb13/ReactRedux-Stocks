@@ -11,4 +11,4 @@ router
   .put(apiController.updateStock)
   .delete(apiController.removeStock);
 
-  
+  module.exports = router;

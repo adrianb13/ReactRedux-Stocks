@@ -4,3 +4,5 @@ const apiController = require("../../controllers/apiController.js");
 router
   .route("/")
   .get(apiController.findUser)
+
+  module.exports = router;
