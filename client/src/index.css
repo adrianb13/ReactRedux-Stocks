@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: "JdLed5Regular-oRdA";
+  src: local("JdLed5Regular-oRdA"), url(./assets/fonts/JdLed5Regular-oRdA.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "StockTicker";
+  src: local("StockTicker"), url(./assets/fonts/StockTicker.TTF) format("truetype");
+}
