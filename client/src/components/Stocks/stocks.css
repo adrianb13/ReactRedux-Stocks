@@ -60,6 +60,10 @@
   margin: 10px auto 0;
 }
 .sSearch {
+  background: lightblue;
+  font-size: 15px;
+  border-radius: 5px;
+  border-style: none;
   margin-right: 20px;
 }
 .sSearchInput {
@@ -71,6 +75,22 @@
   outline: 0;
   border-bottom: 2px solid gray;
   border-style: solid;
+}
+.sSearchHeaderBox {
+  width: 850px;
+  height: 500px;
+  background: url("../../assets/images/stockChart.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.sSearchHeader {
+  font-family: 'Tangerine', cursive;
+  text-align: center;
+  font-size: 80px;
 }
 
 /* Search Table */
@@ -89,22 +109,6 @@
   background: lime;
   border: 1.5px solid grey;
 }
-.sTable {
-  width: 90%;
-  text-align: center;
-  border-collapse: collapse;
-  margin: 50px auto 0;
-}
-.sTable th, .sTable td {
-  min-width: 80px;
-  border: 1px solid gray;
-  padding: 2px 5px;
-}
-.sPriceDisclaimer {
-  width: 90%;
-  margin: 10px auto;
-}
-
 
 
 @keyframes tickerSlide {

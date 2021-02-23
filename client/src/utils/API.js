@@ -10,7 +10,7 @@ const BASEURLALPHA = process.env.REACT_APP_ALPHA_BASE;
 //const BASEURLFINNHUB = process.env.REACT_APP_FINNHUB_BASE;
 
 
-export default {
+const API = {
   getStocks: () => {
     return axios.get("/api/stocks")
   },
@@ -24,13 +24,12 @@ export default {
     return axios.delete("/api/stocks/" + stockId);
   },
 
-  /* findStockSymbol: (query) => {
-    let search = "search?q=" + query + "&symbol?exchange=US";
-    return axios.get(BASEURLFINNHUB + "search?q=" + query + APIKEYFINNHUB);
-  },
-  */
-
+  //General Search & Info for Stocks
   findStockSymbol: (query) => {
+    //Finnhub Search
+    //let search = "search?q=" + query + "&symbol?exchange=US";
+    //return axios.get(BASEURLFINNHUB + "search?q=" + query + APIKEYFINNHUB);
+    
     //Alpha Search
     //let search = "function=SYMBOL_SEARCH&keywords=" + query + APIKEYALPHA;
     //return axios.get(BASEURLALPHA + search);
@@ -44,8 +43,16 @@ export default {
     //Finnhub Quote
     //return axios.get(BASEURLFINNHUB + "quote?symbol=" + symbol + APIKEYFINNHUB);
     
+    //Alpha Quote
     let quote = "function=GLOBAL_QUOTE&symbol=" + symbol + APIKEYALPHA;
     return axios.get(BASEURLALPHA + quote);
+  },
+  companyInfo: (symbol) => {
+    //Alpha Info
+    let info = "function=OVERVIEW&symbol=" + symbol + APIKEYALPHA;
+    return axios.get(BASEURLALPHA + info);
   }
 
 }
+
+export default API;

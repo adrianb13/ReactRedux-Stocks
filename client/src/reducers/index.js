@@ -1,11 +1,26 @@
 import * as types from "../actions/types";
 
 const initialState = {
+  matches: [],
+  quote: [],
+  stockInfo: [],
   stocks: []
 }
 
 const rootReducer = ( state = initialState, action ) => {
   switch(action.type){
+    case types.FIND_STOCK_SYMBOL_SUCCESS:
+      return Object.assign({}, state, {
+        matches: action.matches
+      });
+    case types.QUOTE_SYMBOL_SUCCESS:
+      return Object.assign({}, state, {
+        quote: action.quote
+      })
+    case types.COMPANY_INFO_SUCCESS:
+      return Object.assign({}, state, {
+        stockInfo: action.info
+      })
     case types.GET_STOCKS_SUCCESS:
       return Object.assign({}, state, {
         stocks: state.stocks.concat(action.stocks)

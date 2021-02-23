@@ -1,0 +1,18 @@
+.sqcTable {
+  width: 90%;
+  text-align: center;
+  border-collapse: collapse;
+  border: 2px solid blue;
+  margin: 50px auto 0;
+}
+.sqcTable th, .sqcTable td {
+  min-width: 80px;
+  border: 1px solid gray;
+  padding: 2px 5px;
+}
+.sqcPriceDisclaimer {
+  width: 90%;
+  color: lightgray;
+  font-size: 10px;
+  margin: 10px auto;
+}

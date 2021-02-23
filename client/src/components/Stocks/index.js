@@ -1,9 +1,13 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-//import { connect } from "react-redux";
-import API from "../../utils/API";
+import { connect } from "react-redux";
+import * as actions from "../../actions/index";
+import { bindActionCreators } from "redux";
+//import API from "../../utils/API";
 import "./stocks.css";
 
+import StockMatchChart from "../StockMatchChart/index";
+import StockQuoteChart from "../StockQuoteChart/index";
 
 class Stocks extends React.Component {
   state = {
@@ -11,9 +15,10 @@ class Stocks extends React.Component {
     bestMatches: null,
     ticker: null,
     tickerName: null,
-    currentStockInfo: null,
     currentStockQuote: null,
+    currentStockInfo: null,
     searchBox: false,
+    searchIntro: true,
     stockAvailable: false
   }
 
@@ -28,31 +33,33 @@ class Stocks extends React.Component {
     if(event.key === "Enter"){
       this.findSymbol(event);
     }
-  }
+  };
 
   findSymbol = (event) => {
     event.preventDefault();
     this.setState({
       stockAvailable: false,
-      query: ""
-    })
+      searchIntro: false
+    });
     
-    let search = this.state.query
-    API.findStockSymbol(search)
+    let search = this.state.query;
+    this.setState({
+      query: ""
+    });
+    this.props.actions.findStockSymbol(search)
       .then(res => {
-        console.log(res.data.tickers)
-        let results = res.data.tickers;
+        let results = this.props.matches.tickers;
         
         if(results.length > 1){
           let bestMatches = results.filter(stock => stock.currency === "USD")
-          console.log(bestMatches)
           
           if(bestMatches.length === 1){
             let current = bestMatches[0];
             this.quoteSymbol(current);
           } else {
             this.setState({
-              bestMatches: bestMatches
+              bestMatches: bestMatches,
+              searchBox: true
             })
           }
 
@@ -60,44 +67,26 @@ class Stocks extends React.Component {
           let current = results[0]
           this.quoteSymbol(current);
         } else {
+          // Add something here for no matches
           console.log("no matches")
-        }
-        
-/*         let tickerSymbol = res.data.result[0].displaySymbol;
-        let currentStockInfo = res.data.result[0]
-        if(tickerSymbol){
-          this.setState({
-            currentStockInfo: currentStockInfo
-          }) */
-/*           API.quoteSymbol(tickerSymbol)
-            .then(res => {
-              console.log(res.data)
-              let change = res.data.c - res.data.pc;
-              let percent = change / res.data.pc * 100;
-              this.setState({
-                currentStockQuote: res.data,
-                currentStockChange: change,
-                currentStockPercent: percent,
-                stockAvailable: true,
-              })
-            }) 
-        } */
+        };
       })
       .catch(err => console.log(err))
-  }
+      
+  };
 
   quoteSymbol = (symbol) => {
     let currentSymbol = symbol.ticker;
     let currentName = symbol.name;
     this.setState({
       ticker: currentSymbol,
-      tickerName: currentName
-    })
+      tickerName: currentName,
+      searchBox: false
+    });
 
-    API.quoteSymbol(currentSymbol)
+    this.props.actions.quoteSymbol(currentSymbol)
       .then(res => {
-        console.log(res.data)
-        let quote = res.data["Global Quote"]
+        let quote = this.props.quote["Global Quote"]
         this.setState({
           currentStockQuote: quote,
           stockAvailable: true
@@ -115,7 +104,16 @@ class Stocks extends React.Component {
           stockAvailable: true,
         }) */
       })
-  }
+
+      this.props.actions.companyInfo(currentSymbol)
+        .then(res => {
+          console.log(this.props.stockInfo)
+          let info = this.props.stockInfo;
+          this.setState({
+            currentStockInfo: info
+          })
+        })
+  };
 
   render () {
     return (
@@ -136,52 +134,47 @@ class Stocks extends React.Component {
 
         {this.state.searchBox ? (
           <div>
-            {this.state.bestMatches.map(match => (
-              <table className="sSearchTable">
-                <thead>
-
-                </thead>
-              </table>
-            ))}
+            <StockMatchChart 
+              bestMatches={this.state.bestMatches}
+              quoteSymbol={this.quoteSymbol}
+            />
           </div>
-        ) : (null)}
+        ) : (
+          <div>
+            {this.state.searchIntro ? (
+              <div className="sSearchHeaderBox">
+                <div className="sSearchHeader">Let's Find Your Next Investment!</div>
+              </div>
+            ) : (null)}
+          </div>
+          
+        )}
 
         {this.state.stockAvailable ? (
           <div className="sTableArea">
-            <table className="sTable">
-              <thead>
-                <tr>
-                  <th>Symbol</th>
-                  <th style={{width: "250px"}}>Name</th>
-                  <th>Current*</th>
-                  <th>+/- ($)</th>
-                  <th>% Change</th>
-                  <th>Open</th>
-                  <th>Today's High</th>
-                  <th>Today's Low</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{this.state.ticker}</td>
-                  <td>{this.state.tickerName}</td>
-                  <td>${this.state.currentStockQuote["05. price"].slice(0, -2)}</td>
-                  <td>{this.state.currentStockQuote["09. change"].slice(0, -2)}</td>
-                  <td>{this.state.currentStockQuote["10. change percent"].slice(0, -2)}</td>
-                  <td>${this.state.currentStockQuote["02. open"].slice(0, -2)}</td>
-                  <td>${this.state.currentStockQuote["03. high"].slice(0, -2)}</td>
-                  <td>${this.state.currentStockQuote["04. low"].slice(0, -2)}</td>
-                </tr>
-              </tbody>
-            </table>
-            <div className="sPriceDisclaimer">* Current pricing does not include After-Hours price changes when Market is closed.</div>
+            <StockQuoteChart 
+              ticker={this.state.ticker}
+              tickerName={this.state.tickerName}
+              currentStockQuote={this.state.currentStockQuote}
+            />
           </div>
         ) : (null)}
-
-        <div></div>
+        
       </div>
     )
   }
+};
+
+const mapStateToProps = (state) => {
+  return { 
+    matches: state.matches,
+    quote: state.quote,
+    stockInfo: state.stockInfo
+  }
 }
 
-export default withRouter((Stocks));
+const mapDispatchToProps = dispatch => {
+  return { actions: bindActionCreators(actions, dispatch)}
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Stocks));
