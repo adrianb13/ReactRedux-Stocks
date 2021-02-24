@@ -21,6 +21,7 @@ const rootReducer = ( state = initialState, action ) => {
       return Object.assign({}, state, {
         stockInfo: action.info
       })
+      
     case types.GET_STOCKS_SUCCESS:
       return Object.assign({}, state, {
         stocks: state.stocks.concat(action.stocks)
