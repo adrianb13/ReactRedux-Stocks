@@ -1,0 +1,36 @@
+.cCompanySection{
+
+}
+.cCompanyHeaderBox {
+  width: 90%;
+  margin: 0 auto 20px;
+  padding: 0 0 25px;
+  border-bottom: 2px dotted white;
+}
+.cCompanyName{
+  text-align: center;
+  text-decoration: underline blue;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 0 auto 15px;
+}
+
+.cCompanyBreakdownBox {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 0 auto;
+}
+
+.cCompanyFundamentals, .cCompanyTechnicals{
+  width: 50%;
+  margin: 0 auto 25px;
+}
+.cCompanyDetailsHeader, .cCompanySharesHeader{
+  text-align: center;
+  text-decoration: underline blue;
+  font-size: 20px;
+  margin: 0 auto 10px;
+}
+

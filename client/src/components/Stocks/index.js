@@ -8,6 +8,7 @@ import "./stocks.css";
 
 import StockMatchChart from "../StockMatchChart/index";
 import StockQuoteChart from "../StockQuoteChart/index";
+import CompanyInfo from "../CompanyInfo";
 
 class Stocks extends React.Component {
   state = {
@@ -147,16 +148,22 @@ class Stocks extends React.Component {
               </div>
             ) : (null)}
           </div>
-          
         )}
 
         {this.state.stockAvailable ? (
-          <div className="sTableArea">
-            <StockQuoteChart 
-              ticker={this.state.ticker}
-              tickerName={this.state.tickerName}
-              currentStockQuote={this.state.currentStockQuote}
-            />
+          <div>
+            <div className="sTableArea">
+              <StockQuoteChart 
+                ticker={this.state.ticker}
+                tickerName={this.state.tickerName}
+                currentStockQuote={this.state.currentStockQuote}
+              />
+            </div>
+            <div>
+              <CompanyInfo 
+                companyInfo={this.state.currentStockInfo}
+              />
+            </div>
           </div>
         ) : (null)}
         
