@@ -122,7 +122,10 @@ class Stocks extends React.Component {
         </div>
         <div className="sDBArea">
           <div className="sDotBorder"></div>
-          <div className="sHeaderText"><span className="sRed">DON'T DELAY,</span> INVEST IN YOUR FUTURE NOW! <span style={{marginLeft: "30px"}}>UR {"\u25B2"} 100%</span></div>
+          <div className="sHeaderText">
+            <div><span className="sRed">DON'T DELAY,</span> INVEST IN YOUR FUTURE NOW!</div>
+            <div><span style={{marginLeft: "30px"}}>UR {"\u25B2"} 100%</span></div>
+          </div>
           <div className="sDotBorder"></div>
         </div>
         <br />
@@ -133,11 +136,16 @@ class Stocks extends React.Component {
 
         {this.state.searchBox ? (
           <div>
-            <StockMatchChart 
-              bestMatches={this.state.bestMatches}
-              quoteSymbol={this.quoteSymbol}
-            />
+            <div className="sMatchText">WHICH ONE DO YOU WANT TO LEARN MORE ABOUT?</div>
+            <div className="sTableHeader">BEST MATCHES</div>
+            <div className="sTableArea">
+              <StockMatchChart 
+                bestMatches={this.state.bestMatches}
+                quoteSymbol={this.quoteSymbol}
+              />
+            </div>
           </div>
+          
         ) : (
           <div>
             {this.state.searchIntro ? (
@@ -153,7 +161,7 @@ class Stocks extends React.Component {
 
         {this.state.stockAvailable ? (
           <div>
-            <div className="sTableArea">
+            <div className="sTableArea">  
               <StockQuoteChart 
                 ticker={this.state.ticker}
                 tickerName={this.state.tickerName}
