@@ -7,6 +7,7 @@ import "./stockMatchChart.css";
 const StockMatchChart = (props) => {
   return (
     <div>
+      <div className="smcHeaderText">WHICH ONE DO YOU WANT TO LEARN MORE ABOUT?</div>
       <div className="smcTableHeader">BEST MATCHES</div>
       <table className="smcTable">
         <thead>
@@ -34,8 +35,8 @@ const StockMatchChart = (props) => {
             </tr>
           ))}
         </tbody>
-        
       </table>
+      
     </div>
   )
 }

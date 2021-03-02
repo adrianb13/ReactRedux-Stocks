@@ -13,7 +13,7 @@ const CompanyInfo = (props) => {
       <div className="cCompanyBreakdownBox">
         <div className="cCompanyFundamentals">
           <div className="cCompanyDetailsHeader">Company Details</div>
-          <div>Address: {props.companyInfo.Address}</div>
+          <div className="cCompanyAddress">Address: {props.companyInfo.Address}</div>
           <div>Employees: {props.companyInfo.FullTimeEmployees}</div>
           <div>Market Cap: {props.companyInfo.MarketCapitalization}</div>
           <div>Sector: {props.companyInfo.Sector}</div>
@@ -42,8 +42,9 @@ const CompanyInfo = (props) => {
           <div>Institution Percentage: {props.companyInfo.PercentInstitutions}%</div>
         </div>
       </div>
-      
-
+      <br />
+      <div className="disclaimer"> *** This site does not provide financial advice. It is here to provide educational information in your process of doing your due diligence.***</div>
+      <br />
     </div>
   )
 };

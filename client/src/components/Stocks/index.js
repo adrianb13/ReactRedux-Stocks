@@ -28,7 +28,7 @@ class Stocks extends React.Component {
     this.setState({
       [name]: value
     })
-  }
+  };
 
   enterSubmit = (event) => {
     if(event.key === "Enter"){
@@ -38,15 +38,12 @@ class Stocks extends React.Component {
 
   findSymbol = (event) => {
     event.preventDefault();
+    let search = this.state.query;
     this.setState({
       stockAvailable: false,
       searchIntro: false
     });
     
-    let search = this.state.query;
-    this.setState({
-      query: ""
-    });
     this.props.actions.findStockSymbol(search)
       .then(res => {
         let results = this.props.matches.tickers;
@@ -87,6 +84,8 @@ class Stocks extends React.Component {
 
     this.props.actions.quoteSymbol(currentSymbol)
       .then(res => {
+        console.log(this.props.quote)
+        console.log(currentSymbol);
         let quote = this.props.quote["Global Quote"]
         this.setState({
           currentStockQuote: quote,
@@ -108,7 +107,6 @@ class Stocks extends React.Component {
 
       this.props.actions.companyInfo(currentSymbol)
         .then(res => {
-          console.log(this.props.stockInfo)
           let info = this.props.stockInfo;
           this.setState({
             currentStockInfo: info
@@ -143,8 +141,11 @@ class Stocks extends React.Component {
         ) : (
           <div>
             {this.state.searchIntro ? (
-              <div className="sSearchHeaderBox">
-                <div className="sSearchHeader">Let's Find Your Next Investment!</div>
+              <div>
+                <div className="sSearchHeaderBox">
+                  <div className="sSearchHeader">Let's Find Your Next Investment!</div>
+                </div>
+                <div className="disclaimer"> *** This site does not provide financial advice. It is here to provide educational information in your process of doing your due diligence.***</div>
               </div>
             ) : (null)}
           </div>

@@ -3,7 +3,7 @@
   min-height: 100vh;
   color: white;
   background-color: black;
-  padding-top: 0.1px;
+  padding: 0.1px 0px;
 }
 .backWhite {
   height: 100%;
@@ -11,6 +11,12 @@
   color: black;
   background-color: whitesmoke;
   padding-top: 0.1px;
+}
+.disclaimer {
+  width: 100%;
+  background: black;
+  text-align: center;
+  padding: 0 0 5px;
 }
 .sHeaderBox {
   width: 100%;
@@ -38,7 +44,7 @@
   background-repeat: repeat-x;
 }
 .sHeaderText {
-  width: 1000px;
+  width: 100%;
   font-family: StockTicker;
   font-size: 30px;
   color: lime;
@@ -81,7 +87,7 @@
   height: 500px;
   background: url("../../assets/images/stockChart.png") no-repeat;
   background-size: 100% 100%;
-  margin: 40px auto;
+  margin: 40px auto 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -113,9 +119,9 @@
 
 @keyframes tickerSlide {
   0% {
-    transform: translateX(250%);
+    transform: translateX(100%);
   }
   100% {
-    transform: translateX(-250%);
+    transform: translateX(-100%);
   }
 }

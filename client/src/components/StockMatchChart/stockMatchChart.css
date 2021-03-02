@@ -1,16 +1,17 @@
-.smcTableHeader {
+.smcTableHeader, .smcHeaderText {
   font-family: StockTicker;
   text-align: center;
+  color: lime;
   font-size: 25px;
   text-decoration: underline;
-  margin: 50px auto 0;
+  margin: 25px auto 0;
 }
 .smcTable {
   width: 90%;
   text-align: center;
   border-collapse: collapse;
   border: 2px solid blue;
-  margin: 15px auto 0;
+  margin: 25px auto 0;
 }
 .smcTable th, .smcTable td {
   min-width: 80px;
@@ -22,4 +23,9 @@
   font-size: 15px;
   border-radius: 5px;
   border-style: none;
+}
+.smcHeaderText{
+  color: white;
+  text-decoration: none;
+  margin: 50px auto 0;
 }

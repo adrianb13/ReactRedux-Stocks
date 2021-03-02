@@ -14,18 +14,20 @@ const StockQuoteChart = (props) => {
             <th>+/- ($)</th>
             <th>% Change</th>
             <th>Open</th>
+            <th>Previous Close</th>
             <th>Today's High</th>
             <th>Today's Low</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{props.ticker}</td>
+            <td style={{fontWeight: "bold"}}>{props.ticker}</td>
             <td>{props.tickerName}</td>
             <td>${props.currentStockQuote["05. price"].slice(0, -2)}</td>
             <td>{props.currentStockQuote["09. change"].slice(0, -2)}</td>
             <td>{props.currentStockQuote["10. change percent"].slice(0, -2)}</td>
             <td>${props.currentStockQuote["02. open"].slice(0, -2)}</td>
+            <td>${props.currentStockQuote["08. previous close"].slice(0, -2)}</td>
             <td>${props.currentStockQuote["03. high"].slice(0, -2)}</td>
             <td>${props.currentStockQuote["04. low"].slice(0, -2)}</td>
           </tr>

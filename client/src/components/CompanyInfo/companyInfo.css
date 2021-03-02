@@ -21,6 +21,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   margin: 0 auto;
+  border-bottom: 2px dotted white;
 }
 
 .cCompanyFundamentals, .cCompanyTechnicals{
@@ -33,4 +34,16 @@
   font-size: 20px;
   margin: 0 auto 10px;
 }
+.cCompanyAddress {
+  padding-right: 20px;
+}
 
+@media(max-width: 700px){
+  .cCompanyBreakdownBox{
+    display: flex;
+    flex-direction: column;
+  }
+  .cCompanyFundamentals, .cCompanyTechnicals{
+    width: 100%;
+  }
+}
