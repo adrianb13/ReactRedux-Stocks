@@ -8,9 +8,10 @@
   border-bottom: 2px dotted white;
 }
 .cCompanyName{
+  font-family: 'Tangerine', cursive;
   text-align: center;
   text-decoration: underline blue;
-  font-size: 25px;
+  font-size: 45px;
   font-weight: bold;
   margin: 0 auto 15px;
 }
@@ -29,9 +30,10 @@
   margin: 0 auto 25px;
 }
 .cCompanyDetailsHeader, .cCompanySharesHeader{
+  font-family: 'Tangerine', cursive;
   text-align: center;
   text-decoration: underline blue;
-  font-size: 20px;
+  font-size: 35px;
   margin: 0 auto 10px;
 }
 .cCompanyAddress {

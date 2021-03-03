@@ -20,7 +20,91 @@ class Stocks extends React.Component {
     currentStockInfo: null,
     searchBox: false,
     searchIntro: true,
-    stockAvailable: false
+    stockAvailable: false,
+    companyInfoAvailable: false
+  }
+
+  componentDidMount = () => {
+    this.date()
+  }
+  
+  date = () => {
+    let date = new Date();
+    let dateDay = date.getDay();
+    let date1 = Math.round(Date.now()/1000);
+
+    //UTC Date (at midnight) in UNIX 
+    let UTC = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+    //let UTCString = new Date(UTC).toString(); 
+    let UTCDay = new Date(UTC).getUTCDay()
+    UTC = Math.round(UTC/1000);
+
+    //Convet current UNIX date to string Example
+    /* let date2 = Date.now()
+    console.log(date2)
+    console.log(new Date(date2).toString()) */
+    
+    this.openClose(date, dateDay, date1, UTC, UTCDay);
+  }
+
+  openClose = (date, dateDay, date1, UTC, UTCDay) => {
+    if(UTCDay === 0){
+      console.log("Sun", UTCDay); 
+      //Need Friday Chart
+      let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-2)/1000 + 43200;
+      let marketClose = marketOpen + 46800;
+      this.setState({
+        marketOpen: marketOpen,
+        marketClose: marketClose
+      })
+      console.log("Local:" + dateDay, "UTC:" + UTCDay,"Open:" + marketOpen, "Close:" + marketClose)
+    
+    } else if(UTCDay === 6){
+      console.log("Sat", UTCDay)
+      //Need Friday Chart
+      let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-1)/1000 + 43200;
+      let marketClose = marketOpen + 46800;
+      this.setState({
+        marketOpen: marketOpen,
+        marketClose: marketClose
+      })
+      console.log("Local:" + dateDay, "UTC:" + UTCDay,"Open:" + marketOpen, "Close:" + marketClose)
+      
+    } else if (UTCDay === 1 || UTCDay === 2 || UTCDay === 3 || UTCDay === 4 || UTCDay === 5){
+      console.log("Weekday")
+      //Monday before Market Open - Need Friday Chart
+      if(UTCDay === 1 && date1 < (UTC + 43200) ){
+        let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-3)/1000 + 43200;
+        let marketClose = marketOpen + 46800;
+        this.setState({
+          marketOpen: marketOpen,
+          marketClose: marketClose
+        })
+        console.log("Local:" + dateDay, "UTC:" + UTCDay, "Open:" + marketOpen, "Close:" + marketClose)
+      
+      //Current Weekday in AH or Pre-Market
+      } else if(UTCDay >= dateDay && date1 < (UTC + 43200)) {
+        console.log("Market AH/PM")
+        let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-1)/1000 + 43200;
+        let marketClose = marketOpen + 46800;
+        this.setState({
+          marketOpen: marketOpen,
+          marketClose: marketClose
+        })
+        console.log("Local:" + dateDay, "UTC:" + UTCDay, "Open:" + marketOpen, "Close:" + marketClose, date1, UTC + 43200)
+      
+      //Market is Open
+      } else {
+        console.log("Market Open")
+        let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())/1000 + 43200;
+        let marketClose = marketOpen + 46800;
+        this.setState({
+          marketOpen: marketOpen,
+          marketClose: marketClose
+        })
+        console.log("Local:" + dateDay, "UTC:" + UTCDay, "Open:" + marketOpen, "Close:" + marketClose)
+      }
+    }
   }
 
   handleInputChange = (event) => {
@@ -41,6 +125,7 @@ class Stocks extends React.Component {
     let search = this.state.query;
     this.setState({
       stockAvailable: false,
+      companyInfoAvailable: false,
       searchIntro: false
     });
     
@@ -84,32 +169,34 @@ class Stocks extends React.Component {
 
     this.props.actions.quoteSymbol(currentSymbol)
       .then(res => {
-        console.log(this.props.quote)
+        //console.log(this.props.quote)
         console.log(currentSymbol);
-        let quote = this.props.quote["Global Quote"]
+        //Alpha Quote - Must update UI states in StockQuoteChart
+        /* let quote = this.props.quote["Global Quote"]
         this.setState({
           currentStockQuote: quote,
           stockAvailable: true
-        })
+        }) */
 
-        //Finnhub Quote - Must update UI states below
-        /* let change = res.data.c - res.data.pc;
-        let percent = change / res.data.pc * 100;
+        //Finnhub Quote - Must update UI states in StockQuoteChart
+        let change = this.props.quote.c - this.props.quote.pc;
+        let percent = change / this.props.quote.pc * 100;
         change = change.toFixed(2);
         percent = percent.toFixed(2);
         this.setState({
-          currentStockQuote: res.data,
+          currentStockQuote: this.props.quote,
           currentStockChange: change,
           currentStockPercent: percent,
           stockAvailable: true,
-        }) */
+        }) 
       })
 
       this.props.actions.companyInfo(currentSymbol)
         .then(res => {
           let info = this.props.stockInfo;
           this.setState({
-            currentStockInfo: info
+            currentStockInfo: info,
+            companyInfoAvailable: true
           })
         })
   };
@@ -166,13 +253,19 @@ class Stocks extends React.Component {
                 ticker={this.state.ticker}
                 tickerName={this.state.tickerName}
                 currentStockQuote={this.state.currentStockQuote}
+                currentStockChange={this.state.currentStockChange}
+                currentStockPercent={this.state.currentStockPercent}
               />
             </div>
-            <div>
-              <CompanyInfo 
-                companyInfo={this.state.currentStockInfo}
-              />
-            </div>
+            
+          </div>
+        ) : (null)}
+
+        {this.state.companyInfoAvailable ? (
+          <div>
+            <CompanyInfo 
+              companyInfo={this.state.currentStockInfo}
+            />
           </div>
         ) : (null)}
         

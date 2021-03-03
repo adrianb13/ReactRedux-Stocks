@@ -6,8 +6,8 @@ const BASEURLPOLYGON = process.env.REACT_APP_POLYGON_BASE;
 const APIKEYALPHA = "&apikey=" + process.env.REACT_APP_ALPHA_API_KEY;
 const BASEURLALPHA = process.env.REACT_APP_ALPHA_BASE;
 
-//const APIKEYFINNHUB = "&token=" + process.env.REACT_APP_FINNHUB_API_KEY;
-//const BASEURLFINNHUB = process.env.REACT_APP_FINNHUB_BASE;
+const APIKEYFINNHUB = "&token=" + process.env.REACT_APP_FINNHUB_API_KEY;
+const BASEURLFINNHUB = process.env.REACT_APP_FINNHUB_BASE;
 
 
 const API = {
@@ -41,16 +41,21 @@ const API = {
   },
   quoteSymbol: (symbol) => {
     //Finnhub Quote
-    //return axios.get(BASEURLFINNHUB + "quote?symbol=" + symbol + APIKEYFINNHUB);
+    return axios.get(BASEURLFINNHUB + "quote?symbol=" + symbol + APIKEYFINNHUB);
     
     //Alpha Quote
-    let quote = "function=GLOBAL_QUOTE&symbol=" + symbol + APIKEYALPHA;
-    return axios.get(BASEURLALPHA + quote);
+    //let quote = "function=GLOBAL_QUOTE&symbol=" + symbol + APIKEYALPHA;
+    //return axios.get(BASEURLALPHA + quote);
   },
   companyInfo: (symbol) => {
     //Alpha Info
     let info = "function=OVERVIEW&symbol=" + symbol + APIKEYALPHA;
     return axios.get(BASEURLALPHA + info);
+  },
+  stockCandles: (stock) => {
+    //Finnhub Candles
+    let candles = "stock/candle?symbol=" + stock.symbol + "&resolution=" + stock.resolution + "&from=" + stock.open + "&to=" + stock.close + APIKEYFINNHUB;
+    return axios.get(BASEURLFINNHUB + candles);
   }
 
 }
