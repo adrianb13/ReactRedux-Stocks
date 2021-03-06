@@ -4,13 +4,12 @@ import { connect } from "react-redux";
 import * as actions from "../../actions/index";
 import { bindActionCreators } from "redux";
 //import API from "../../utils/API";
-import "./stocks.css";
+import "./stocksSearch.css";
 
+import Banner from "../Banner";
 import StockMatchChart from "../StockMatchChart/index";
-import StockQuoteChart from "../StockQuoteChart/index";
-import CompanyInfo from "../CompanyInfo";
 
-class Stocks extends React.Component {
+class StocksSearch extends React.Component {
   state = {
     query: null,
     bestMatches: null,
@@ -53,56 +52,62 @@ class Stocks extends React.Component {
       //Need Friday Chart
       let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-2)/1000 + 43200;
       let marketClose = marketOpen + 46800;
-      this.setState({
+      let timing = {
         marketOpen: marketOpen,
         marketClose: marketClose
-      })
-      console.log("Local:" + dateDay, "UTC:" + UTCDay,"Open:" + marketOpen, "Close:" + marketClose)
-    
+      }
+      this.props.actions.stockChartTiming(timing);
+      localStorage.setItem("timing", JSON.stringify(timing));
+
     } else if(UTCDay === 6){
       console.log("Sat", UTCDay)
       //Need Friday Chart
       let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-1)/1000 + 43200;
       let marketClose = marketOpen + 46800;
-      this.setState({
+      let timing = {
         marketOpen: marketOpen,
         marketClose: marketClose
-      })
-      console.log("Local:" + dateDay, "UTC:" + UTCDay,"Open:" + marketOpen, "Close:" + marketClose)
-      
+      }
+      this.props.actions.stockChartTiming(timing);
+      localStorage.setItem("timing", JSON.stringify(timing));
+
     } else if (UTCDay === 1 || UTCDay === 2 || UTCDay === 3 || UTCDay === 4 || UTCDay === 5){
       console.log("Weekday")
       //Monday before Market Open - Need Friday Chart
       if(UTCDay === 1 && date1 < (UTC + 43200) ){
         let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-3)/1000 + 43200;
         let marketClose = marketOpen + 46800;
-        this.setState({
+        let timing = {
           marketOpen: marketOpen,
           marketClose: marketClose
-        })
-        console.log("Local:" + dateDay, "UTC:" + UTCDay, "Open:" + marketOpen, "Close:" + marketClose)
-      
+        }
+        this.props.actions.stockChartTiming(timing);
+        localStorage.setItem("timing", JSON.stringify(timing));
+
       //Current Weekday in AH or Pre-Market
       } else if(UTCDay >= dateDay && date1 < (UTC + 43200)) {
         console.log("Market AH/PM")
         let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-1)/1000 + 43200;
         let marketClose = marketOpen + 46800;
-        this.setState({
+        let timing = {
           marketOpen: marketOpen,
           marketClose: marketClose
-        })
-        console.log("Local:" + dateDay, "UTC:" + UTCDay, "Open:" + marketOpen, "Close:" + marketClose, date1, UTC + 43200)
-      
+        }
+        this.props.actions.stockChartTiming(timing);
+        localStorage.setItem("timing", JSON.stringify(timing));
+
       //Market is Open
       } else {
         console.log("Market Open")
         let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())/1000 + 43200;
         let marketClose = marketOpen + 46800;
-        this.setState({
+        let timing = {
           marketOpen: marketOpen,
           marketClose: marketClose
-        })
-        console.log("Local:" + dateDay, "UTC:" + UTCDay, "Open:" + marketOpen, "Close:" + marketClose)
+        }
+        this.props.actions.stockChartTiming(timing);
+        localStorage.setItem("timing", JSON.stringify(timing));
+
       }
     }
   }
@@ -138,6 +143,7 @@ class Stocks extends React.Component {
           
           if(bestMatches.length === 1){
             let current = bestMatches[0];
+            
             this.quoteSymbol(current);
           } else {
             this.setState({
@@ -147,7 +153,7 @@ class Stocks extends React.Component {
           }
 
         } else if (results.length === 1) {
-          let current = results[0]
+          let current = results[0];
           this.quoteSymbol(current);
         } else {
           // Add something here for no matches
@@ -166,47 +172,27 @@ class Stocks extends React.Component {
       tickerName: currentName,
       searchBox: false
     });
-
+    console.log(symbol)
+    this.props.actions.stockName(symbol)
     this.props.actions.quoteSymbol(currentSymbol)
+    this.props.actions.companyInfo(currentSymbol)
       .then(res => {
-        //console.log(this.props.quote)
-        console.log(currentSymbol);
-        //Alpha Quote - Must update UI states in StockQuoteChart
-        /* let quote = this.props.quote["Global Quote"]
-        this.setState({
-          currentStockQuote: quote,
-          stockAvailable: true
-        }) */
+        let quote = this.props.quote;
+        let info = this.props.stockInfo;
+        let name = this.props.stockName;
+        localStorage.setItem("quote", JSON.stringify(quote));
+        localStorage.setItem("stockInfo", JSON.stringify(info));
+        localStorage.setItem("stockName", JSON.stringify(name));
 
-        //Finnhub Quote - Must update UI states in StockQuoteChart
-        let change = this.props.quote.c - this.props.quote.pc;
-        let percent = change / this.props.quote.pc * 100;
-        change = change.toFixed(2);
-        percent = percent.toFixed(2);
-        this.setState({
-          currentStockQuote: this.props.quote,
-          currentStockChange: change,
-          currentStockPercent: percent,
-          stockAvailable: true,
-        }) 
+        this.props.history.push("./" + currentSymbol)
+        console.log(currentSymbol); 
       })
-
-      this.props.actions.companyInfo(currentSymbol)
-        .then(res => {
-          let info = this.props.stockInfo;
-          this.setState({
-            currentStockInfo: info,
-            companyInfoAvailable: true
-          })
-        })
   };
 
   render () {
     return (
       <div className="backBlack">
-        <div className="sHeaderBox">
-          <div className="sHeader">TICKER ME THIS</div>
-        </div>
+        <Banner />
         <div className="sDBArea">
           <div className="sDotBorder"></div>
           <div className="sHeaderText">
@@ -245,29 +231,6 @@ class Stocks extends React.Component {
             ) : (null)}
           </div>
         )}
-
-        {this.state.stockAvailable ? (
-          <div>
-            <div className="sTableArea">  
-              <StockQuoteChart 
-                ticker={this.state.ticker}
-                tickerName={this.state.tickerName}
-                currentStockQuote={this.state.currentStockQuote}
-                currentStockChange={this.state.currentStockChange}
-                currentStockPercent={this.state.currentStockPercent}
-              />
-            </div>
-            
-          </div>
-        ) : (null)}
-
-        {this.state.companyInfoAvailable ? (
-          <div>
-            <CompanyInfo 
-              companyInfo={this.state.currentStockInfo}
-            />
-          </div>
-        ) : (null)}
         
       </div>
     )
@@ -278,7 +241,9 @@ const mapStateToProps = (state) => {
   return { 
     matches: state.matches,
     quote: state.quote,
-    stockInfo: state.stockInfo
+    stockInfo: state.stockInfo,
+    stockName: state.stockName,
+    timing: state.timing
   }
 }
 
@@ -286,4 +251,4 @@ const mapDispatchToProps = dispatch => {
   return { actions: bindActionCreators(actions, dispatch)}
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Stocks));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StocksSearch));

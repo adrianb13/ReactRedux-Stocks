@@ -101,3 +101,11 @@ export const deleteStock = (stock) => {
 const deleteStockSuccess = (stock) => {
   return { type: types.DELETE_STOCK_SUCCESS, stock};
 };
+
+export const stockName = (name) => {
+  return { type: types.STOCK_NAME_SUCCESS, name}
+};
+
+export const stockChartTiming = (timing) => {
+  return { type: types.STOCK_TIMING_SUCCESS, timing}
+};

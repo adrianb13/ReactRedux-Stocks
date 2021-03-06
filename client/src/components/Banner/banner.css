@@ -1,0 +1,12 @@
+/* Ticker Me This */
+.sHeaderBox {
+  width: 100%;
+}
+.sHeader {
+  background: black;
+  font-family: StockTicker;
+  font-size: 50px;
+  color: lime;
+  text-align: center;
+  padding: 20px 0;
+}

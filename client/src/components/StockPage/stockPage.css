@@ -1,0 +1,27 @@
+/* Search Table */
+.sTableArea {
+  overflow: auto;
+  margin: 0px 20px 10px;
+  scrollbar-width: thin;
+}
+.sTableArea::-webkit-scrollbar {
+  height: 5px;
+}
+.sTableArea::-webkit-scrollbar-track {  
+  background: grey;
+}
+.sTableArea::-webkit-scrollbar-thumb {
+  background: lime;
+  border: 1.5px solid grey;
+}
+
+.sTableHeader, .sMatchText {
+  width: 100%;
+  font-family: StockTicker;
+  text-align: center;
+  color: lime;
+  font-size: 25px;
+  line-height: 28px;
+  text-decoration: underline;
+  margin: 25px auto 0;
+}

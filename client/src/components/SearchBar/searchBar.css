@@ -1,0 +1,51 @@
+/* Ticker Search */
+.sSearchBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 20px;
+  margin: 10px auto 0;
+}
+.sSearch {
+  background: lightblue;
+  font-size: 15px;
+  border-radius: 5px;
+  border-style: none;
+  margin-right: 20px;
+}
+.sSearchInput {
+  width: 220px;
+  background: transparent;
+  color: white;
+  font-size: 20px;
+  border: 0;
+  outline: 0;
+  border-bottom: 2px solid gray;
+  border-style: solid;
+}
+.sSearchHeaderBox {
+  width: auto;
+  height: 500px;
+  background: url("../../assets/images/stockChart.png") no-repeat;
+  background-size: 100% 100%;
+  margin: 40px auto 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.sSearchHeader {
+  font-family: 'Tangerine', cursive;
+  text-align: center;
+  font-size: 80px;
+}
+
+
+@keyframes tickerSlide {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

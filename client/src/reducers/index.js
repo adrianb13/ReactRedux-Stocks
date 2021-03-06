@@ -4,7 +4,9 @@ const initialState = {
   matches: [],
   quote: [],
   stockInfo: [],
-  stocks: []
+  stocks: [],
+  stockName: null,
+  timing: null
 }
 
 const rootReducer = ( state = initialState, action ) => {
@@ -16,11 +18,11 @@ const rootReducer = ( state = initialState, action ) => {
     case types.QUOTE_SYMBOL_SUCCESS:
       return Object.assign({}, state, {
         quote: action.quote
-      })
+      });
     case types.COMPANY_INFO_SUCCESS:
       return Object.assign({}, state, {
         stockInfo: action.info
-      })
+      });
       
     case types.GET_STOCKS_SUCCESS:
       return Object.assign({}, state, {
@@ -47,6 +49,15 @@ const rootReducer = ( state = initialState, action ) => {
       newStateS.splice(idS, 1);
       return Object.assign({}, state, {
         trackers: newStateS
+      });
+
+    case types.STOCK_NAME_SUCCESS:
+      return Object.assign({}, state, {
+        stockName: action.name
+      })
+    case types.STOCK_TIMING_SUCCESS:
+      return Object.assign({}, state, {
+        timing: action.timing
       });
     default: 
       return state;

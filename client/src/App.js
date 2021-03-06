@@ -2,14 +2,16 @@ import './App.css';
 import { Router, Route, Switch } from "react-router-dom";
 import history from "./history/history";
 
-import Stocks from "./components/Stocks";
+import StocksSearch from "./components/StocksSearch";
+import StockPage from "./components/StockPage";
 
 function App() {
   return (
     <Router history={history}>
       <Switch>
-        <Route exact path="/" component={Stocks} />
-        <Route component= {Stocks} />
+        <Route exact path="/" component={StocksSearch} />
+        <Route exact path="/:id" component={StockPage} />
+        <Route component= {StocksSearch} />
       </Switch>
     </Router>
   );
