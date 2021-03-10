@@ -15,13 +15,3 @@
   border: 1.5px solid grey;
 }
 
-.sTableHeader, .sMatchText {
-  width: 100%;
-  font-family: StockTicker;
-  text-align: center;
-  color: lime;
-  font-size: 25px;
-  line-height: 28px;
-  text-decoration: underline;
-  margin: 25px auto 0;
-}

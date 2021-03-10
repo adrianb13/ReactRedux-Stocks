@@ -9,6 +9,7 @@ import "../StocksSearch/stocksSearch.css";
 import Banner from "../Banner";
 import StockQuoteChart from "../StockQuoteChart/index";
 import CompanyInfo from "../CompanyInfo";
+import SearchBar from "../SearchBar";
 
 class StockPage extends React.Component {
   state = {
@@ -18,7 +19,8 @@ class StockPage extends React.Component {
     currentStockName: null,
     timing: null,
     stockAvailable: false,
-    companyInfoAvailable: false
+    companyInfoAvailable: false,
+    newSearch: false
   };
 
   componentDidMount = () => {
@@ -27,7 +29,10 @@ class StockPage extends React.Component {
 
   componentDidUpdate = (nextProps) => {
     if(nextProps.quote !== this.props.quote){
-      console.log(this.props.quote)
+      this.checkData();
+    }
+    if(nextProps.stockInfo !== this.props.stockInfo){
+      this.companyInfo();
     }
   }
 
@@ -40,10 +45,11 @@ class StockPage extends React.Component {
       this.setState({
         currentStockQuote: quote,
         currentStockName: name,
-        timing: timing
+        timing: timing,
+        newSearch: false
       }, () => {
         this.quoteInfo();
-        console.log(this.state.currentStockName)
+        //console.log(this.state.currentStockName)
       })
     } else {
       let quote = JSON.parse(localStorage.getItem("quote"));
@@ -53,7 +59,8 @@ class StockPage extends React.Component {
       this.setState({
         currentStockQuote: quote,
         currentStockName: name,
-        timing: timing
+        timing: timing,
+        newSearch: false
       }, () => {
         this.quoteInfo();
         this.companyInfo();
@@ -98,33 +105,58 @@ class StockPage extends React.Component {
     }
   };
 
+  checkSubmit = (bool) => {
+    if(bool === true){
+      this.setState({
+        newSearch: true,
+        stockAvailable: false,
+        companyInfoAvailable: false,
+      })
+      
+    } else (
+      this.setState({
+        newSearch: false
+      })
+    )
+  }
+
 
   render () {
     return (
       <div className="backBlack">
         <Banner />
         <div className="sDotBorder"></div>
-        {this.state.stockAvailable ? (
+        <br/>
+        <SearchBar 
+          searchIntro={false}
+          checkSubmit={this.checkSubmit}
+        />
+        {this.state.newSearch ? (null) : (
           <div>
-            <div className="sTableArea">  
-              <StockQuoteChart 
-                ticker={this.state.currentStockName.ticker}
-                tickerName={this.state.currentStockName.name}
-                currentStockQuote={this.state.currentStockQuote}
-                currentStockChange={this.state.currentStockChange}
-                currentStockPercent={this.state.currentStockPercent}
-              />
-            </div>
-          </div>
-        ) : (null)}
+            {this.state.stockAvailable ? (
+              <div>
+                <div className="sTableArea">  
+                  <StockQuoteChart 
+                    ticker={this.state.currentStockName.ticker}
+                    tickerName={this.state.currentStockName.name}
+                    currentStockQuote={this.state.currentStockQuote}
+                    currentStockChange={this.state.currentStockChange}
+                    currentStockPercent={this.state.currentStockPercent}
+                  />
+                </div>
+              </div>
+            ) : (null)}
 
-        {this.state.companyInfoAvailable ? (
-          <div>
-            <CompanyInfo 
-              companyInfo={this.state.currentStockInfo}
-            />
+            {this.state.companyInfoAvailable ? (
+              <div>
+                <CompanyInfo 
+                  companyInfo={this.state.currentStockInfo}
+                />
+              </div>
+            ) : (null)}
           </div>
-        ) : (null)}
+        )}
+        
       </div>
     )
   };

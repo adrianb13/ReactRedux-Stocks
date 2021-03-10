@@ -6,9 +6,10 @@
   border-collapse: collapse;
   border: 2px solid blue;
   margin: 50px auto 0;
+  font-size: 16px;
 }
 .sqcTable th, .sqcTable td {
-  min-width: 80px;
+  min-width: 11%;
   border: 1px solid gray;
   padding: 2px 5px;
 }
@@ -17,4 +18,10 @@
   color: lightgray;
   font-size: 10px;
   margin: 10px auto;
+}
+
+@media(max-width: 900px){
+  .sqcTable{
+    font-size: 90%;
+  }
 }

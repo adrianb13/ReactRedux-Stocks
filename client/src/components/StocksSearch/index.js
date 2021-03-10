@@ -7,7 +7,7 @@ import { bindActionCreators } from "redux";
 import "./stocksSearch.css";
 
 import Banner from "../Banner";
-import StockMatchChart from "../StockMatchChart/index";
+import SearchBar from "../SearchBar";
 
 class StocksSearch extends React.Component {
   state = {
@@ -18,9 +18,7 @@ class StocksSearch extends React.Component {
     currentStockQuote: null,
     currentStockInfo: null,
     searchBox: false,
-    searchIntro: true,
-    stockAvailable: false,
-    companyInfoAvailable: false
+    searchIntro: true
   }
 
   componentDidMount = () => {
@@ -110,84 +108,12 @@ class StocksSearch extends React.Component {
 
       }
     }
+  };
+
+  checkSubmit = (bool) => {
+    
   }
 
-  handleInputChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    })
-  };
-
-  enterSubmit = (event) => {
-    if(event.key === "Enter"){
-      this.findSymbol(event);
-    }
-  };
-
-  findSymbol = (event) => {
-    event.preventDefault();
-    let search = this.state.query;
-    this.setState({
-      stockAvailable: false,
-      companyInfoAvailable: false,
-      searchIntro: false
-    });
-    
-    this.props.actions.findStockSymbol(search)
-      .then(res => {
-        let results = this.props.matches.tickers;
-        
-        if(results.length > 1){
-          let bestMatches = results.filter(stock => stock.currency === "USD")
-          
-          if(bestMatches.length === 1){
-            let current = bestMatches[0];
-            
-            this.quoteSymbol(current);
-          } else {
-            this.setState({
-              bestMatches: bestMatches,
-              searchBox: true
-            })
-          }
-
-        } else if (results.length === 1) {
-          let current = results[0];
-          this.quoteSymbol(current);
-        } else {
-          // Add something here for no matches
-          console.log("no matches")
-        };
-      })
-      .catch(err => console.log(err))
-      
-  };
-
-  quoteSymbol = (symbol) => {
-    let currentSymbol = symbol.ticker;
-    let currentName = symbol.name;
-    this.setState({
-      ticker: currentSymbol,
-      tickerName: currentName,
-      searchBox: false
-    });
-    console.log(symbol)
-    this.props.actions.stockName(symbol)
-    this.props.actions.quoteSymbol(currentSymbol)
-    this.props.actions.companyInfo(currentSymbol)
-      .then(res => {
-        let quote = this.props.quote;
-        let info = this.props.stockInfo;
-        let name = this.props.stockName;
-        localStorage.setItem("quote", JSON.stringify(quote));
-        localStorage.setItem("stockInfo", JSON.stringify(info));
-        localStorage.setItem("stockName", JSON.stringify(name));
-
-        this.props.history.push("./" + currentSymbol)
-        console.log(currentSymbol); 
-      })
-  };
 
   render () {
     return (
@@ -202,35 +128,10 @@ class StocksSearch extends React.Component {
           <div className="sDotBorder"></div>
         </div>
         <br />
-        <div className="sSearchBox" onChange={this.handleInputChange}>
-          <button className="sSearch" type="submit" onClick={this.findSymbol}>Search</button>
-          <input className="sSearchInput" type="text" name="query" id="query" onKeyDown={this.enterSubmit} placeholder="Name or Ticker Symbol"></input>
-        </div>
-
-        {this.state.searchBox ? (
-          <div>
-            <div className="sMatchText">WHICH ONE DO YOU WANT TO LEARN MORE ABOUT?</div>
-            <div className="sTableHeader">BEST MATCHES</div>
-            <div className="sTableArea">
-              <StockMatchChart 
-                bestMatches={this.state.bestMatches}
-                quoteSymbol={this.quoteSymbol}
-              />
-            </div>
-          </div>
-          
-        ) : (
-          <div>
-            {this.state.searchIntro ? (
-              <div>
-                <div className="sSearchHeaderBox">
-                  <div className="sSearchHeader">Let's Find Your Next Investment!</div>
-                </div>
-                <div className="disclaimer"> *** This site does not provide financial advice. It is here to provide educational information in your process of doing your due diligence.***</div>
-              </div>
-            ) : (null)}
-          </div>
-        )}
+        <SearchBar
+          searchIntro={true}
+          checkSubmit={this.checkSubmit}
+        />
         
       </div>
     )

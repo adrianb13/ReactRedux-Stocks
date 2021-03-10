@@ -4,8 +4,23 @@ import { connect } from "react-redux";
 import * as actions from "../../actions/index";
 import { bindActionCreators } from "redux";
 import "./searchBar.css";
+import "../StockPage/stockPage.css";
+
+import StockMatchChart from "../StockMatchChart/index";
+
+/* Props
+searchIntro = boolean - whether to show Ticker Image and Intro Header from Home page.
+checkSubmit = boolean - track whether submit button was clicked
+*/
 
 class SearchBar extends React.Component{
+  state = {
+    searchBox: false,
+    searchIntro: this.props.searchIntro,
+    checkSubmit: this.props.checkSubmit,
+    stockAvailable: false,
+    companyInfoAvailable: false
+  }
 
   handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -22,6 +37,10 @@ class SearchBar extends React.Component{
 
   findSymbol = (event) => {
     event.preventDefault();
+    
+    /* Allows for check if new search was submitted */
+    this.props.checkSubmit(true);
+    
     let search = this.state.query;
     this.setState({
       stockAvailable: false,
@@ -60,6 +79,9 @@ class SearchBar extends React.Component{
   };
 
   quoteSymbol = (symbol) => {
+
+    this.props.checkSubmit(false);
+
     let currentSymbol = symbol.ticker;
     let currentName = symbol.name;
     this.setState({
@@ -67,7 +89,7 @@ class SearchBar extends React.Component{
       tickerName: currentName,
       searchBox: false
     });
-    console.log(symbol)
+    //console.log(symbol)
     this.props.actions.stockName(symbol)
     this.props.actions.quoteSymbol(currentSymbol)
     this.props.actions.companyInfo(currentSymbol)
@@ -80,16 +102,43 @@ class SearchBar extends React.Component{
         localStorage.setItem("stockName", JSON.stringify(name));
 
         this.props.history.push("./" + currentSymbol)
-        console.log(currentSymbol); 
+        //console.log(currentSymbol); 
       })
   };
 
   render(){
     return (
-      <div className="sSearchBox" onChange={this.handleInputChange}>
-        <button className="sSearch" type="submit" onClick={this.findSymbol}>Search</button>
-        <input className="sSearchInput" type="text" name="query" id="query" onKeyDown={this.enterSubmit} placeholder="Name or Ticker Symbol"></input>
+      <div>
+        <div className="sbSearchBox" onChange={this.handleInputChange}>
+          <button className="sbSearch" type="submit" onClick={this.findSymbol}>Search</button>
+          <input className="sbSearchInput" type="text" name="query" id="query" onKeyDown={this.enterSubmit} placeholder="Name or Ticker Symbol"></input>
+        </div>
+        {this.state.searchBox ? (
+          <div>
+            <div className="sbMatchText">WHICH ONE DO YOU WANT TO LEARN MORE ABOUT?</div>
+            <div className="sbTableHeader">BEST MATCHES</div>
+            <div className="sTableArea">
+              <StockMatchChart 
+                bestMatches={this.state.bestMatches}
+                quoteSymbol={this.quoteSymbol}
+              />
+            </div>
+          </div>
+          
+        ) : (
+          <div>
+            {this.state.searchIntro ? (
+              <div>
+                <div className="sbSearchHeaderBox">
+                  <div className="sbSearchHeader">Let's Find Your Next Investment!</div>
+                </div>
+                <div className="disclaimer"> *** This site does not provide financial advice. It is here to provide educational information in your process of doing your due diligence.***</div>
+              </div>
+            ) : (null)}
+          </div>
+        )}
       </div>
+      
     )
   }
 }
