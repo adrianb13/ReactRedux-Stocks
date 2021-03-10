@@ -18,6 +18,9 @@
   border: 1px solid gray;
   padding: 2px 5px;
 }
+.smcTable th{
+  color: lightgrey;
+}
 .smcSearch {
   background: lightblue;
   font-size: 15px;

@@ -26,13 +26,21 @@
 
 .sbTableHeader, .sbMatchText {
   width: 100%;
-  font-family: StockTicker;
   text-align: center;
-  color: lime;
   font-size: 25px;
   line-height: 28px;
-  text-decoration: underline;
   margin: 25px auto 0;
+}
+.sbTableHeader{
+  font-family: StockTicker;
+  color: lime;
+  text-decoration: underline;
+}
+.sbMatchText{
+  font-family: 'Tangerine', cursive;
+  color: white;
+  text-decoration: none;
+  font-size: 40px;
 }
 
 /* Ticker Chart Image with Header */

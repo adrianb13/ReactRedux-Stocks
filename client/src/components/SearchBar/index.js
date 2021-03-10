@@ -115,7 +115,9 @@ class SearchBar extends React.Component{
         </div>
         {this.state.searchBox ? (
           <div>
-            <div className="sbMatchText">WHICH ONE DO YOU WANT TO LEARN MORE ABOUT?</div>
+            <br /><br />
+            <div className="sbMatchText">Which One Do You Want To Learn More About?</div>
+            <br /><br />
             <div className="sbTableHeader">BEST MATCHES</div>
             <div className="sTableArea">
               <StockMatchChart 

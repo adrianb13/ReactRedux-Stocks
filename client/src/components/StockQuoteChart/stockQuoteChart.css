@@ -13,6 +13,10 @@
   border: 1px solid gray;
   padding: 2px 5px;
 }
+.sqcLink{
+  font-weight: bold;
+  text-decoration: underline lime;
+}
 .sqcPriceDisclaimer {
   width: 90%;
   color: lightgray;

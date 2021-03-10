@@ -16,21 +16,21 @@ const StockMatchChart = (props) => {
             <th>Primary Exchange</th>
             <th>Region</th>
             <th>Currency</th>
-            <th></th>
+            
           </tr>
         </thead>
 
         <tbody>
           {props.bestMatches.map(match => (
-            <tr key={match.ticker}>
-              <td>{match.ticker}</td>
-              <td>{match.name}</td>
+            <tr key={match.ticker} onClick={() => props.quoteSymbol(match)}>
+              <td className="sqcLink">{match.ticker}</td>
+              <td className="sqcLink">{match.name}</td>
               <td>{match.primaryExch}</td>
               <td>{match.locale}</td>
               <td>{match.currency}</td>
-              <td>
+              {/* <td>
                 <button className="smcSearch" onClick={() => props.quoteSymbol(match)}>Select</button>
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>
