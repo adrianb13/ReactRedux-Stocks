@@ -25,6 +25,7 @@ class StockPage extends React.Component {
 
   componentDidMount = () => {
     this.checkData();
+    console.log(this.props.timing)
   };
 
   componentDidUpdate = (nextProps) => {

@@ -109,3 +109,17 @@ export const stockName = (name) => {
 export const stockChartTiming = (timing) => {
   return { type: types.STOCK_TIMING_SUCCESS, timing}
 };
+
+export const stockChartInfo = (chartInfo) => {
+  return (dispatch) => {
+    return API.stockCandles(chartInfo)
+      .then(res => {
+        dispatch(stockChartInfoSuccess(res.data))
+      })
+      .catch(err => console.log(err));
+  };
+};
+
+const stockChartInfoSuccess = (chartInfo) => {
+  return { type: types.CHART_INFO_SUCCESS, chartInfo}
+};

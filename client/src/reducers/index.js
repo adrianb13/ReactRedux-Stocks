@@ -6,7 +6,8 @@ const initialState = {
   stockInfo: [],
   stocks: [],
   stockName: null,
-  timing: null
+  timing: null,
+  chartInfo: []
 }
 
 const rootReducer = ( state = initialState, action ) => {
@@ -58,6 +59,10 @@ const rootReducer = ( state = initialState, action ) => {
     case types.STOCK_TIMING_SUCCESS:
       return Object.assign({}, state, {
         timing: action.timing
+      });
+    case types.STOCK_TIMING_SUCCESS:
+      return Object.assign({}, state, {
+        chartInfo: action.chartInfo
       });
     default: 
       return state;
