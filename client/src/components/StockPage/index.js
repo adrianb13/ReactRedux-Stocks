@@ -8,6 +8,7 @@ import "../StocksSearch/stocksSearch.css";
 
 import Banner from "../Banner";
 import StockQuoteChart from "../StockQuoteChart/index";
+import StockCandles from "../StockCandles";
 import CompanyInfo from "../CompanyInfo";
 import SearchBar from "../SearchBar";
 
@@ -25,7 +26,6 @@ class StockPage extends React.Component {
 
   componentDidMount = () => {
     this.checkData();
-    console.log(this.props.timing)
   };
 
   componentDidUpdate = (nextProps) => {
@@ -35,7 +35,7 @@ class StockPage extends React.Component {
     if(nextProps.stockInfo !== this.props.stockInfo){
       this.companyInfo();
     }
-  }
+  };
 
   checkData = () => {
     if(this.props.quote.length !== 0){
@@ -67,7 +67,7 @@ class StockPage extends React.Component {
         this.companyInfo();
       })
     }
-  }
+  };
 
   quoteInfo = () => {
     //Alpha Quote - Must update UI states in StockQuoteChart
@@ -119,7 +119,7 @@ class StockPage extends React.Component {
         newSearch: false
       })
     )
-  }
+  };
 
 
   render () {
@@ -145,6 +145,9 @@ class StockPage extends React.Component {
                     currentStockPercent={this.state.currentStockPercent}
                   />
                 </div>
+                <div>
+                  <StockCandles />
+                </div>
               </div>
             ) : (null)}
 
@@ -161,7 +164,7 @@ class StockPage extends React.Component {
       </div>
     )
   };
-}
+};
 
 const mapStateToProps = (state, ownProps) => {
   return { 
@@ -171,7 +174,7 @@ const mapStateToProps = (state, ownProps) => {
     stockName: state.stockName,
     timing: state.timing
   }
-}
+};
 
 const mapDispatchToProps = dispatch => {
   return { actions: bindActionCreators(actions, dispatch)}

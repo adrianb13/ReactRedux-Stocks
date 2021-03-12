@@ -4,6 +4,7 @@ import history from "./history/history";
 
 import StocksSearch from "./components/StocksSearch";
 import StockPage from "./components/StockPage";
+//import StockCandles from "./components/StockCandles";
 
 function App() {
   return (
