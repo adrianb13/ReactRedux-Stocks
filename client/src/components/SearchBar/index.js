@@ -22,6 +22,12 @@ class SearchBar extends React.Component{
     companyInfoAvailable: false
   }
 
+  componentDidUpdate = (nextProps) => {
+    if(nextProps.matches !== this.props.matches){
+      this.checkMatches();
+    }
+  }
+
   handleInputChange = (event) => {
     const { name, value } = event.target;
     this.setState({
@@ -49,34 +55,33 @@ class SearchBar extends React.Component{
     });
     
     this.props.actions.findStockSymbol(search)
-      .then(res => {
-        let results = this.props.matches.tickers;
-        console.log(this.props.matches.tickers);
-        if(results.length > 1){
-          let bestMatches = results.filter(stock => stock.currency === "USD")
-          
-          if(bestMatches.length === 1){
-            let current = bestMatches[0];
-            
-            this.quoteSymbol(current);
-          } else {
-            this.setState({
-              bestMatches: bestMatches,
-              searchBox: true
-            })
-          }
 
-        } else if (results.length === 1) {
-          let current = results[0];
-          this.quoteSymbol(current);
-        } else {
-          // Add something here for no matches
-          console.log("no matches")
-        };
-      })
-      .catch(err => console.log(err))
-      
   };
+
+  checkMatches = () => {
+    let results = this.props.matches.tickers;
+    console.log(this.props.matches.tickers);
+    if(results.length > 1){
+      let bestMatches = results.filter(stock => stock.currency === "USD")
+      
+      if(bestMatches.length === 1){
+        let current = bestMatches[0];
+        
+        this.quoteSymbol(current);
+      } else {
+        this.setState({
+          bestMatches: bestMatches,
+          searchBox: true
+        })
+      }
+    } else if (results.length === 1) {
+      let current = results[0];
+      this.quoteSymbol(current);
+    } else {
+      // Add something here for no matches
+      console.log("no matches")
+    };
+  }
 
   quoteSymbol = (symbol) => {
 
