@@ -36,6 +36,7 @@ const API = {
     
     //Polygon Search
     let search = "tickers?sort=ticker&locale=us&search=" + query +"&perpage=10&page=1" + APIKEYPOLYGON
+    console.log(BASEURLPOLYGON + search)
     return axios.get(BASEURLPOLYGON + search)
 
   },
