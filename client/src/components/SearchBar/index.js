@@ -24,6 +24,7 @@ class SearchBar extends React.Component{
 
   componentDidUpdate = (nextProps) => {
     if(nextProps.matches !== this.props.matches){
+      console.log("updated", this.props.matches)
       this.checkMatches();
     }
   }
