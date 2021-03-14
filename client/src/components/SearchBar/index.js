@@ -53,7 +53,7 @@ class SearchBar extends React.Component{
       companyInfoAvailable: false,
       searchIntro: false
     });
-    console.log(process.env.REACT_APP_POLYGON_BASE)
+    
     this.props.actions.findStockSymbol(search)
       .then(res => {
         let results = this.props.matches.tickers;
