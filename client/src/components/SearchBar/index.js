@@ -51,7 +51,7 @@ class SearchBar extends React.Component{
     this.props.actions.findStockSymbol(search)
       .then(res => {
         let results = this.props.matches.tickers;
-        
+        console.log(this.props.matches.tickers);
         if(results.length > 1){
           let bestMatches = results.filter(stock => stock.currency === "USD")
           

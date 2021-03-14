@@ -79,7 +79,7 @@ class StockCandles extends React.Component {
     if(this.props.timing !== null){
       timespan = this.props.timing;
       name = this.props.stockName;
-      console.log("props", this.props.timing)
+     
       let chartTimeSpan = {
         symbol: name.ticker,
         resolution: 5,
@@ -93,13 +93,12 @@ class StockCandles extends React.Component {
           })
           localStorage.setItem("chartPlots", JSON.stringify(this.props.chartInfo))
           this.plotPoints(this.state.chartPlots)
-          console.log(this.state.chartPlots)
+
         })
     } else {
       timespan = JSON.parse(localStorage.getItem("timing"));
       name = JSON.parse(localStorage.getItem("stockName"));
       let chartPlots = JSON.parse(localStorage.getItem("chartPlots"))
-      console.log("storage", timespan)
       this.plotPoints(chartPlots)
     }    
   };

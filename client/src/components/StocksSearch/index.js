@@ -46,7 +46,7 @@ class StocksSearch extends React.Component {
 
   openClose = (date, dateDay, date1, UTC, UTCDay) => {
     if(UTCDay === 0){
-      console.log("Sun", UTCDay); 
+      //console.log("Sun", UTCDay); 
       //Need Friday Chart
       let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-2)/1000 + 43200;
       let marketClose = marketOpen + 46800;
@@ -58,7 +58,7 @@ class StocksSearch extends React.Component {
       localStorage.setItem("timing", JSON.stringify(timing));
 
     } else if(UTCDay === 6){
-      console.log("Sat", UTCDay)
+      //console.log("Sat", UTCDay)
       //Need Friday Chart
       let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-1)/1000 + 43200;
       let marketClose = marketOpen + 46800;
@@ -70,7 +70,7 @@ class StocksSearch extends React.Component {
       localStorage.setItem("timing", JSON.stringify(timing));
 
     } else if (UTCDay === 1 || UTCDay === 2 || UTCDay === 3 || UTCDay === 4 || UTCDay === 5){
-      console.log("Weekday")
+      //console.log("Weekday")
       //Monday before Market Open - Need Friday Chart
       if(UTCDay === 1 && date1 < (UTC + 43200) ){
         let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-3)/1000 + 43200;
@@ -84,7 +84,7 @@ class StocksSearch extends React.Component {
 
       //Current Weekday in AH or Pre-Market
       } else if(UTCDay >= dateDay && date1 < (UTC + 43200)) {
-        console.log("Market AH/PM")
+        //console.log("Market AH/PM")
         let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-1)/1000 + 43200;
         let marketClose = marketOpen + 46800;
         let timing = {
@@ -96,7 +96,7 @@ class StocksSearch extends React.Component {
 
       //Market is Open
       } else {
-        console.log("Market Open")
+        //console.log("Market Open")
         let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())/1000 + 43200;
         let marketClose = marketOpen + 46800;
         let timing = {
