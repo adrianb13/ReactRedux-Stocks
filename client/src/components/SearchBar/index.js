@@ -19,7 +19,8 @@ class SearchBar extends React.Component{
     searchIntro: this.props.searchIntro,
     checkSubmit: this.props.checkSubmit,
     stockAvailable: false,
-    companyInfoAvailable: false
+    companyInfoAvailable: false,
+    notFound: false
   }
 
   componentDidUpdate = (nextProps) => {
@@ -51,7 +52,8 @@ class SearchBar extends React.Component{
     this.setState({
       stockAvailable: false,
       companyInfoAvailable: false,
-      searchIntro: false
+      searchIntro: false,
+      notFound: false
     });
     
     this.props.actions.findStockSymbol(search)
@@ -77,6 +79,9 @@ class SearchBar extends React.Component{
           this.quoteSymbol(current);
         } else {
           // Add something here for no matches
+          this.setState({
+            notFound: true
+          })
           console.log("no matches")
         };
       })
@@ -142,7 +147,16 @@ class SearchBar extends React.Component{
                 </div>
                 <div className="disclaimer"> *** This site does not provide financial advice. It is here to provide educational information in your process of doing your due diligence.***</div>
               </div>
-            ) : (null)}
+            ) : (
+              <div>
+                {this.state.notFound ? (
+                  <div className="sbNotFoundBox">
+                    <div className="sbNotFoundText">Sorry, <span className="sbRed">no company info found</span> under this name or ticker symbol.</div>
+                    <div className="sbNotFoundText">Please try your search again.</div>
+                  </div>
+                ) : (null)}
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -55,8 +55,19 @@
   justify-content: center;
   align-items: center;
 }
-.sbSearchHeader {
+.sbSearchHeader, .sbNotFoundText {
   font-family: 'Tangerine', cursive;
   text-align: center;
   font-size: 80px;
+}
+.sbNotFoundBox {
+  margin: 50px auto;
+}
+.sbNotFoundText{
+  font-size: 60px;
+}
+
+.sbRed{
+  color: red;
+  font-weight: bold;
 }

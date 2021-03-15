@@ -23,8 +23,8 @@ const StockMatchChart = (props) => {
         <tbody>
           {props.bestMatches.map(match => (
             <tr key={match.ticker} onClick={() => props.quoteSymbol(match)}>
-              <td className="sqcLink">{match.ticker}</td>
-              <td className="sqcLink">{match.name}</td>
+              <td className="smcLink">{match.ticker}</td>
+              <td className="smcLink">{match.name}</td>
               <td>{match.primaryExch}</td>
               <td>{match.locale}</td>
               <td>{match.currency}</td>

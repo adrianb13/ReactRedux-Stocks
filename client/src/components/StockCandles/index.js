@@ -104,24 +104,27 @@ class StockCandles extends React.Component {
   };
 
   plotPoints = (chartPlots) => {
-    let data1 = []
-    /* [[Timestamp], [O, H, L, C]] */
-    for(let i = 0; i < chartPlots.t.length; i++){
-        let time = chartPlots.t[i] * 1000;
-        let pair = {
-          "x": new Date(time).toLocaleTimeString("en-US"),
-          "y": [chartPlots.o[i].toFixed(2), chartPlots.h[i].toFixed(2), chartPlots.l[i].toFixed(2), chartPlots.c[i].toFixed(2) ]
-        }
-        data1.push(pair)      
-    };
-    this.setState(prevState => ({
-      ...prevState,
-      series: [{
-        ...prevState.series,
-        data: data1
-      }],
-      showChart: true
-    }))
+    if(chartPlots.s !== "no_data"){
+      let data1 = []
+      /* [[Timestamp], [O, H, L, C]] */
+      for(let i = 0; i < chartPlots.t.length; i++){
+          let time = chartPlots.t[i] * 1000;
+          let pair = {
+            "x": new Date(time).toLocaleTimeString("en-US"),
+            "y": [chartPlots.o[i].toFixed(2), chartPlots.h[i].toFixed(2), chartPlots.l[i].toFixed(2), chartPlots.c[i].toFixed(2) ]
+          }
+          data1.push(pair)      
+      };
+      this.setState(prevState => ({
+        ...prevState,
+        series: [{
+          ...prevState.series,
+          data: data1
+        }],
+        showChart: true
+      }))
+    }
+    
   };
 
   render (){
