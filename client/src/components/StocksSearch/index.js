@@ -123,7 +123,7 @@ class StocksSearch extends React.Component {
           <div className="sDotBorder"></div>
           <div className="sHeaderText">
             <div><span className="sRed">DON'T DELAY,</span> INVEST IN YOUR FUTURE NOW!</div>
-            <div><span style={{marginLeft: "30px"}}>UR {"\u0026"} 100%</span></div>
+            <div><span style={{marginLeft: "30px"}}>UR {"\u25B2"} 100%</span></div>
           </div>
           <div className="sDotBorder"></div>
         </div>
