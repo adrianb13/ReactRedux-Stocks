@@ -71,3 +71,13 @@
   color: red;
   font-weight: bold;
 }
+.brokerLink{
+  text-align: center;
+  margin: 10px auto;
+}
+.brokerLink a:link, .brokerLink a:visited, .brokerLink a:hover, .brokerLink a:active{
+  color: lime;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: underline;
+}

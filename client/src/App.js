@@ -4,13 +4,14 @@ import history from "./history/history";
 
 import StocksSearch from "./components/StocksSearch";
 import StockPage from "./components/StockPage";
-//import StockCandles from "./components/StockCandles";
+import Brokers from "./components/Brokers";
 
 function App() {
   return (
     <Router history={history}>
       <Switch>
         <Route exact path="/" component={StocksSearch} />
+        <Route exact path="/brokers" component={Brokers} />
         <Route exact path="/:id" component={StockPage} />
         <Route component= {StocksSearch} />
       </Switch>

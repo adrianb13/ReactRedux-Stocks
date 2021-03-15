@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../../actions/index";
 import { bindActionCreators } from "redux";
@@ -124,6 +124,12 @@ class SearchBar extends React.Component{
           <button className="sbSearch" type="submit" onClick={this.findSymbol}>Search</button>
           <input className="sbSearchInput" type="text" name="query" id="query" onKeyDown={this.enterSubmit} placeholder="Name or Ticker Symbol"></input>
         </div>
+        <div className="brokerLink">
+          <Link to="/brokers">
+            <div >Need A Broker? Click Here!!!</div>
+          </Link>
+        </div>
+
         {this.state.searchBox ? (
           <div>
             <br /><br />

@@ -1,0 +1,90 @@
+.bHeader{
+  width: 100%;
+  text-align: center;
+  font-family: StockTicker;
+  font-size: 35px;
+  margin: 20px auto;
+  padding-bottom: 20px;
+}
+.bBox{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-bottom: 50px;
+}
+.bSection {
+  width: 33%;
+}
+.bBorders{
+  border-left: 2px solid blue;
+  border-right: 2px solid blue;
+}
+.webull, .sofi, .robinhood{
+  cursor: pointer;
+  width: 300px;
+  height: 100px;
+  border-radius: 5px;
+  margin: 0 auto;
+}
+.webull{
+  background: url("../../assets/images/webull.png") no-repeat;
+  background-size: 100% 100%;
+}
+.sofi{
+  background: url("../../assets/images/sofi.png") no-repeat;
+  background-size: 100% 100%;
+}
+.robinhood{
+  background: url("../../assets/images/robinhood.png") no-repeat;
+  background-size: 100% 100%;
+}
+.webull a:link, .webull a:visited, .webull a:hover, .webull a:active{
+  color: rgb(56, 0, 236);
+}
+.sofi a:link, .sofi a:visited, .sofi a:hover, .sofi a:active{
+  color: rgb(0, 170, 206);
+}
+.robinhood a:link, .robinhood a:visited, .robinhood a:hover, .robinhood a:active{
+  color: lime;
+}
+.bLinkText, .bComparisonHeader {
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.bComparisonHeader{
+  text-decoration: underline;
+}
+.bBullets{
+  cursor: default;
+  width: 90%;
+  margin: 0 auto;
+}
+.bPoints{
+  margin-bottom: 10px;
+}
+
+@media(max-width: 1240px){
+  .bBox{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-bottom: 40px;
+  }
+  .bSection {
+    width: 90%;
+    padding-bottom: 50px;
+    margin: 0 auto;
+  }
+  .bBorders{
+    border-top: 2px solid blue;
+    border-left: none;
+    border-bottom: 2px solid blue;
+    border-right: none;
+    padding-top: 50px;
+    margin-bottom: 50px;
+  }
+}
