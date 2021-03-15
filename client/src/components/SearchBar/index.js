@@ -157,7 +157,7 @@ class SearchBar extends React.Component{
               <div>
                 {this.state.notFound ? (
                   <div className="sbNotFoundBox">
-                    <div className="sbNotFoundText">Sorry, <span className="sbRed">no company info found</span> under this name or ticker symbol.</div>
+                    <div className="sbNotFoundText">Sorry, <span className="red">no company info found</span> under this name or ticker symbol.</div>
                     <div className="sbNotFoundText">Please try your search again.</div>
                   </div>
                 ) : (null)}

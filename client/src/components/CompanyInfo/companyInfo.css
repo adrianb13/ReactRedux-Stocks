@@ -5,7 +5,7 @@
   width: 90%;
   margin: 0 auto 20px;
   padding: 0 0 25px;
-  border-bottom: 2px dotted white;
+  border-bottom: 2px dotted blue;
 }
 .cCompanyName{
   font-family: 'Tangerine', cursive;
@@ -22,7 +22,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   margin: 0 auto;
-  border-bottom: 2px dotted white;
+  border-bottom: 2px dotted blue;
 }
 
 .cCompanyFundamentals, .cCompanyTechnicals{

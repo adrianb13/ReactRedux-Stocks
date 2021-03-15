@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import "./broker.css";
+import "../../App.css";
 
 import Banner from "../Banner";
 
@@ -26,7 +27,7 @@ const Brokers = () => {
             <div className="bPoints">- Decidated "News" section with updates that are immediate and frequent from mainstream outlets.</div>
             <div className="bPoints">- This is the gateway to more intricate and complicated Trading platforms for the serious Day Traders though many traders are loyal to this app due to it's market trading hours.</div>
             <br />
-            <div className="bComparisonHeader">Disadvantages</div>
+            <div className="bComparisonHeader" style={{color: "red"}}>Disadvantages</div>
             <div className="bPoints">- Information and layout can be overwhelming for someone just starting to invest. New investors should consult someone familiar with the application to help them learn the process.  You don't want to miss a trade because you don't know how to use the app.</div>
             <div className="bPoints">- Currently no OTC Market investing, but you can follow them on a watchlist.</div>
             <div className="bPoints">- Almost too many sections to keep track of depending on the size of your portfolio as far as the number of stocks and your watchlist(s).</div>
@@ -50,7 +51,7 @@ const Brokers = () => {
             <div className="bPoints">- If you were looking to leave a traditional bank while still having the traditional bank products, this is a great option.</div>
             <div className="bPoints">- They are continuing to build out new features, so just because something is not a feature now does not mean it isn't being worked on as an update in the future.</div>
             <br />
-            <div className="bComparisonHeader">Disadvantages</div>
+            <div className="bComparisonHeader" style={{color: "red"}}>Disadvantages</div>
             <div className="bPoints">- If you are used to brick & mortar banking & investing, this may not be good for you.</div>
             <div className="bPoints">- Currently NO OPTIONS TRADING.</div>
             <div className="bPoints">- Other investors can see exactly what you're doing, if you do not keep your own activity private.</div>
@@ -73,7 +74,7 @@ const Brokers = () => {
             <div className="bPoints">- The stock information is simple and easy to read without detailed indicators (can also be a disadvantage for seasoned investors). Does have a "candlestick" chart option unlike SoFi.</div>
             <div className="bPoints">- They also offer an online wallet where you can use your available cash like a bank account.</div>
             <br />
-            <div className="bComparisonHeader">Disadvantages</div>
+            <div className="bComparisonHeader" style={{color: "red"}}>Disadvantages</div>
             <div className="bPoints">- Currently No OTC Market Trading.</div>
             <div className="bPoints">- It's almost too easy to get yourself in financial trouble if you have no idea what you are doing and just trading without understanding the full process. Especially with Options Trading. Search "WallStreetBets" and you'll see what I mean.</div>
             <div className="bPoints">- There is no social aspect to this (which can also be a benefit depending on how easily swayed by opinion you are as an investor).</div>
@@ -82,6 +83,7 @@ const Brokers = () => {
           </div>
         </div>
       </div>
+      <div className="disclaimer"> *** This site does not provide financial advice. It is here to provide educational information in your process of doing your due diligence.***</div>
     </div>
   )
 }

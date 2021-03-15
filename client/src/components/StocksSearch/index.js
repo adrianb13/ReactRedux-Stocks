@@ -48,7 +48,7 @@ class StocksSearch extends React.Component {
     if(UTCDay === 0){
       //console.log("Sun", UTCDay); 
       //Need Friday Chart
-      let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-2)/1000 + 43200;
+      let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-2)/1000 + 39600;
       let marketClose = marketOpen + 46800;
       let timing = {
         marketOpen: marketOpen,
@@ -60,7 +60,7 @@ class StocksSearch extends React.Component {
     } else if(UTCDay === 6){
       //console.log("Sat", UTCDay)
       //Need Friday Chart
-      let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-1)/1000 + 43200;
+      let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-1)/1000 + 39600;
       let marketClose = marketOpen + 46800;
       let timing = {
         marketOpen: marketOpen,
@@ -72,8 +72,8 @@ class StocksSearch extends React.Component {
     } else if (UTCDay === 1 || UTCDay === 2 || UTCDay === 3 || UTCDay === 4 || UTCDay === 5){
       //console.log("Weekday")
       //Monday before Market Open - Need Friday Chart
-      if(UTCDay === 1 && date1 < (UTC + 43200) ){
-        let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-3)/1000 + 43200;
+      if(UTCDay === 1 && date1 < (UTC + 39600) ){
+        let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-3)/1000 + 39600;
         let marketClose = marketOpen + 46800;
         let timing = {
           marketOpen: marketOpen,
@@ -83,9 +83,9 @@ class StocksSearch extends React.Component {
         localStorage.setItem("timing", JSON.stringify(timing));
 
       //Current Weekday in AH or Pre-Market
-      } else if(UTCDay >= dateDay && date1 < (UTC + 43200)) {
+      } else if(UTCDay >= dateDay && date1 < (UTC + 39600)) {
         //console.log("Market AH/PM")
-        let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-1)/1000 + 43200;
+        let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()-1)/1000 + 39600;
         let marketClose = marketOpen + 46800;
         let timing = {
           marketOpen: marketOpen,
@@ -97,7 +97,7 @@ class StocksSearch extends React.Component {
       //Market is Open
       } else {
         //console.log("Market Open")
-        let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())/1000 + 43200;
+        let marketOpen = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())/1000 + 39600;
         let marketClose = marketOpen + 46800;
         let timing = {
           marketOpen: marketOpen,
