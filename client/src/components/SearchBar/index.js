@@ -20,12 +20,20 @@ class SearchBar extends React.Component{
     checkSubmit: this.props.checkSubmit,
     stockAvailable: false,
     companyInfoAvailable: false,
-    notFound: false
+    notFound: false,
+    query: null
+  }
+
+  componentDidMount = () => {
+    console.log("mount",this.props.match.params.id)
+    this.checkPage();
   }
 
   componentDidUpdate = (nextProps) => {
-    if(nextProps.matches !== this.props.matches){
-      
+    console.log(nextProps)
+    if(nextProps.match.params.id !== this.props.match.params.id){
+      this.checkPage();
+      console.log("hit")
     }
   }
 
@@ -38,28 +46,47 @@ class SearchBar extends React.Component{
 
   enterSubmit = (event) => {
     if(event.key === "Enter"){
-      this.findSymbol(event);
+      this.findSymbol();
     }
   };
 
-  findSymbol = (event) => {
-    event.preventDefault();
-    
-    /* Allows for check if new search was submitted */
-    this.props.checkSubmit(true);
-    
-    let search = this.state.query;
+  checkPage = () => {
+    console.log("check")
+    if(this.props.match.path !== "/"){
+      let id = this.props.match.params.id
+      this.setState({
+        query: id
+      }, () => {
+        this.findSymbol();
+      })
+      
+    }
+  }
+
+  findSymbol = () => {  
     this.setState({
       stockAvailable: false,
       companyInfoAvailable: false,
       searchIntro: false,
       notFound: false
     });
+    /* Allows for check if new search was submitted */
+    console.log(this.props.match.params.id)
+    console.log("query", this.state.query)
+    this.props.checkSubmit(true);
+    let search = null;
+    if(this.props.match.path !== "/:id"){
+      search = this.state.query;
+    } else if (this.state.query) {
+      search = this.state.query;
+    } else if (this.props.match.path === "/:id"){
+      search = this.props.match.params.id;
+    }
     
+    console.log("search ", search)
     this.props.actions.findStockSymbol(search)
       .then(res => {
         let results = this.props.matches.tickers;
-        //console.log(this.props.matches.tickers);
         if(results.length > 1){
           let bestMatches = results.filter(stock => stock.currency === "USD")
           
@@ -78,21 +105,18 @@ class SearchBar extends React.Component{
           let current = results[0];
           this.quoteSymbol(current);
         } else {
-          // Add something here for no matches
           this.setState({
             notFound: true
           })
           console.log("no matches")
         };
       })
-      .catch(err => console.log(err))
-      
+      .catch(err => console.log(err))     
   };
 
   quoteSymbol = (symbol) => {
-
     this.props.checkSubmit(false);
-
+    console.log("quoting" + symbol.ticker)
     let currentSymbol = symbol.ticker;
     let currentName = symbol.name;
     this.setState({
