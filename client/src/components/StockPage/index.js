@@ -50,9 +50,9 @@ class StockPage extends React.Component {
         newSearch: false
       }, () => {
         this.quoteInfo();
-        //console.log(this.state.currentStockName)
       })
     } else {
+      /* used on page refresh to save API calls */
       let quote = JSON.parse(localStorage.getItem("quote"));
       let name = JSON.parse(localStorage.getItem("stockName"));
       let timing = JSON.parse(localStorage.getItem("timing"));
@@ -114,11 +114,11 @@ class StockPage extends React.Component {
         companyInfoAvailable: false,
       })
       
-    } else (
+    } else {
       this.setState({
         newSearch: false
       })
-    )
+    }    
   };
 
 

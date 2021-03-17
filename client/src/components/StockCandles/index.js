@@ -90,9 +90,10 @@ class StockCandles extends React.Component {
         .then(res => {
           this.setState({
             chartPlots: this.props.chartInfo,
+          }, () => {
+            localStorage.setItem("chartPlots", JSON.stringify(this.props.chartInfo))
+            this.plotPoints(this.state.chartPlots)
           })
-          localStorage.setItem("chartPlots", JSON.stringify(this.props.chartInfo))
-          this.plotPoints(this.state.chartPlots)
 
         })
     } else {

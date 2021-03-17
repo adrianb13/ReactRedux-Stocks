@@ -14,3 +14,8 @@
   background: lime;
   border: 1.5px solid grey;
 }
+.sSearchHeader {
+  font-family: 'Tangerine', cursive;
+  text-align: center;
+  font-size: 80px;
+}

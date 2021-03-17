@@ -17,9 +17,6 @@ class SearchBar extends React.Component{
   state = {
     searchBox: false,
     searchIntro: this.props.searchIntro,
-    checkSubmit: this.props.checkSubmit,
-    stockAvailable: false,
-    companyInfoAvailable: false,
     notFound: false,
     query: null
   }
@@ -31,7 +28,6 @@ class SearchBar extends React.Component{
   componentDidUpdate = (nextProps) => {
     if(nextProps.match.params.id !== this.props.match.params.id){
       this.checkPage();
-      console.log("hit")
     }
   }
 
@@ -62,15 +58,11 @@ class SearchBar extends React.Component{
 
   findSymbol = () => {  
     this.setState({
-      stockAvailable: false,
-      companyInfoAvailable: false,
       searchIntro: false,
       notFound: false
     });
     /* Allows for check if new search was submitted */
     this.props.checkSubmit(true);
-    //console.log(this.props.match.params.id)
-    //console.log("query", this.state.query)
     
     let search = null;
     if(this.props.match.path !== "/:id"){
@@ -81,16 +73,19 @@ class SearchBar extends React.Component{
       search = this.props.match.params.id;
     }
     
-    //console.log("search ", search)
     this.props.actions.findStockSymbol(search)
       .then(res => {
         let results = this.props.matches.tickers;
         if(results.length > 1){
           let bestMatches = results.filter(stock => stock.currency === "USD")
+
+          /* Used when on "./:id" but has multiple matches based on name. Reduces matches to single Stock */
+          if(this.props.match.path === "/:id" && search === this.props.match.params.id ){
+            bestMatches = bestMatches.filter(match => match.ticker === this.props.match.params.id)
+          }
           
           if(bestMatches.length === 1){
             let current = bestMatches[0];
-            
             this.quoteSymbol(current);
           } else {
             this.setState({
@@ -114,7 +109,6 @@ class SearchBar extends React.Component{
 
   quoteSymbol = (symbol) => {
     this.props.checkSubmit(false);
-    //console.log("quoting" + symbol.ticker)
     let currentSymbol = symbol.ticker;
     let currentName = symbol.name;
     this.setState({
@@ -122,11 +116,11 @@ class SearchBar extends React.Component{
       tickerName: currentName,
       searchBox: false
     });
-    //console.log(symbol)
     this.props.actions.stockName(symbol)
     this.props.actions.quoteSymbol(currentSymbol)
     this.props.actions.companyInfo(currentSymbol)
       .then(res => {
+        this.props.checkSubmit(false);
         let quote = this.props.quote;
         let info = this.props.stockInfo;
         let name = this.props.stockName;
@@ -135,7 +129,6 @@ class SearchBar extends React.Component{
         localStorage.setItem("stockName", JSON.stringify(name));
 
         this.props.history.push("./" + currentSymbol)
-        //console.log(currentSymbol); 
       })
   };
 

@@ -7,7 +7,6 @@ import "./stockMatchChart.css";
 const StockMatchChart = (props) => {
   return (
     <div>
-      
       <table className="smcTable">
         <thead>
           <tr>
@@ -16,7 +15,6 @@ const StockMatchChart = (props) => {
             <th>Primary Exchange</th>
             <th>Region</th>
             <th>Currency</th>
-            
           </tr>
         </thead>
 
@@ -28,9 +26,6 @@ const StockMatchChart = (props) => {
               <td>{match.primaryExch}</td>
               <td>{match.locale}</td>
               <td>{match.currency}</td>
-              {/* <td>
-                <button className="smcSearch" onClick={() => props.quoteSymbol(match)}>Select</button>
-              </td> */}
             </tr>
           ))}
         </tbody>
