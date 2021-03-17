@@ -30,7 +30,6 @@ class SearchBar extends React.Component{
   }
 
   componentDidUpdate = (nextProps) => {
-    console.log(nextProps)
     if(nextProps.match.params.id !== this.props.match.params.id){
       this.checkPage();
       console.log("hit")
@@ -51,7 +50,6 @@ class SearchBar extends React.Component{
   };
 
   checkPage = () => {
-    console.log("check")
     if(this.props.match.path !== "/"){
       let id = this.props.match.params.id
       this.setState({
@@ -71,9 +69,10 @@ class SearchBar extends React.Component{
       notFound: false
     });
     /* Allows for check if new search was submitted */
-    console.log(this.props.match.params.id)
-    console.log("query", this.state.query)
     this.props.checkSubmit(true);
+    //console.log(this.props.match.params.id)
+    //console.log("query", this.state.query)
+    
     let search = null;
     if(this.props.match.path !== "/:id"){
       search = this.state.query;
@@ -108,7 +107,7 @@ class SearchBar extends React.Component{
           this.setState({
             notFound: true
           })
-          console.log("no matches")
+          //console.log("no matches")
         };
       })
       .catch(err => console.log(err))     
@@ -116,7 +115,7 @@ class SearchBar extends React.Component{
 
   quoteSymbol = (symbol) => {
     this.props.checkSubmit(false);
-    console.log("quoting" + symbol.ticker)
+    //console.log("quoting" + symbol.ticker)
     let currentSymbol = symbol.ticker;
     let currentName = symbol.name;
     this.setState({
