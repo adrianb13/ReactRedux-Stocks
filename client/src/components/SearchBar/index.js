@@ -25,7 +25,6 @@ class SearchBar extends React.Component{
   }
 
   componentDidMount = () => {
-    console.log("mount",this.props.match.params.id)
     this.checkPage();
   }
 
@@ -82,7 +81,7 @@ class SearchBar extends React.Component{
       search = this.props.match.params.id;
     }
     
-    console.log("search ", search)
+    //console.log("search ", search)
     this.props.actions.findStockSymbol(search)
       .then(res => {
         let results = this.props.matches.tickers;
