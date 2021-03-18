@@ -70,7 +70,7 @@ const rootReducer = ( state = initialState, action ) => {
       return Object.assign({}, state, {
         news: action.news
       });
-    case types.MARKET_NAME_SUCCESS:
+    case types.MARKET_NEWS_SUCCESS:
       return Object.assign({}, state, {
         marketNews: action.marketNews
       });
