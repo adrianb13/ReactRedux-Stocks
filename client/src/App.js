@@ -5,6 +5,7 @@ import history from "./history/history";
 import StocksSearch from "./components/StocksSearch";
 import StockPage from "./components/StockPage";
 import Brokers from "./components/Brokers";
+import MarketNews from "./components/MarketNews";
 
 function App() {
   return (

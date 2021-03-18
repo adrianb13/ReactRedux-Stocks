@@ -125,7 +125,6 @@ class StockCandles extends React.Component {
         showChart: true
       }))
     }
-    
   };
 
   render (){
