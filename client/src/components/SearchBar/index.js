@@ -84,6 +84,7 @@ class SearchBar extends React.Component{
             bestMatches = bestMatches.filter(match => match.ticker === this.props.match.params.id)
           }
           
+          /* Otherwise, this is the normal tree based on Search results ignoring the previous "if" */
           if(bestMatches.length === 1){
             let current = bestMatches[0];
             this.quoteSymbol(current);

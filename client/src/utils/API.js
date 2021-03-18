@@ -2,6 +2,7 @@ import axios from "axios";
 
 const APIKEYPOLYGON = "&apiKey=" + process.env.REACT_APP_POLYGON_API_KEY;
 const BASEURLPOLYGON = process.env.REACT_APP_POLYGON_BASE;
+const NEWSURLPOLYGON = process.env.REACT_APP_POLYGON_NEWS;
 
 const APIKEYALPHA = "&apikey=" + process.env.REACT_APP_ALPHA_API_KEY;
 const BASEURLALPHA = process.env.REACT_APP_ALPHA_BASE;
@@ -39,23 +40,31 @@ const API = {
     return axios.get(BASEURLPOLYGON + search)
 
   },
-  quoteSymbol: (symbol) => {
+  quoteSymbol: (ticker) => {
     //Finnhub Quote
-    return axios.get(BASEURLFINNHUB + "quote?symbol=" + symbol + APIKEYFINNHUB);
+    return axios.get(BASEURLFINNHUB + "quote?symbol=" + ticker + APIKEYFINNHUB);
     
     //Alpha Quote
     //let quote = "function=GLOBAL_QUOTE&symbol=" + symbol + APIKEYALPHA;
     //return axios.get(BASEURLALPHA + quote);
   },
-  companyInfo: (symbol) => {
+  companyInfo: (ticker) => {
     //Alpha Info
-    let info = "function=OVERVIEW&symbol=" + symbol + APIKEYALPHA;
+    let info = "function=OVERVIEW&symbol=" + ticker + APIKEYALPHA;
     return axios.get(BASEURLALPHA + info);
   },
   stockCandles: (stock) => {
     //Finnhub Candles
     let candles = "stock/candle?symbol=" + stock.symbol + "&resolution=" + stock.resolution + "&from=" + stock.open + "&to=" + stock.close + APIKEYFINNHUB;
     return axios.get(BASEURLFINNHUB + candles);
+  },
+  stockNews: (ticker) => {
+    let news = ticker + "/news?perpage=15&page=1" + APIKEYPOLYGON;
+    return axios.get(NEWSURLPOLYGON + news);
+  },
+  marketNews: () => {
+    let marketNews = "news?category=general" + APIKEYFINNHUB;
+    return axios.get(BASEURLFINNHUB + marketNews);
   }
 
 }

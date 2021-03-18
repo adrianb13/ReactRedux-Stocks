@@ -123,3 +123,31 @@ export const stockChartInfo = (chartInfo) => {
 const stockChartInfoSuccess = (chartInfo) => {
   return { type: types.CHART_INFO_SUCCESS, chartInfo}
 };
+
+export const stockNewsInfo = (ticker) => {
+  return (dispatch) => {
+    return API.stockNews(ticker)
+      .then(res => {
+        dispatch(stockNewsInfoSuccess(res.data))
+      })
+      .catch(err => console.log(err))
+  };
+};
+
+const stockNewsInfoSuccess = (news) => {
+  return { type : types.STOCK_NEWS_SUCCESS, news}
+};
+
+export const marketNewsInfo = () => {
+  return (dispatch) => {
+    return API.marketNews()
+      .then(res => {
+        dispatch(marketNewsInfoSuccess(res.data))
+      })
+      .catch(err => console.log(err))
+  };
+};
+
+const marketNewsInfoSuccess = (marketNews) => {
+  return { type : types.MARKET_NEWS_SUCCESS, marketNews}
+};

@@ -72,8 +72,9 @@
   font-weight: bold;
 }
 .brokerLink{
+  width: 300px;
   text-align: center;
-  margin: 10px auto;
+  margin: 15px auto;
 }
 .brokerLink a:link, .brokerLink a:visited, .brokerLink a:hover, .brokerLink a:active{
   color: orange;
