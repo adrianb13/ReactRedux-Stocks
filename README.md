@@ -13,7 +13,7 @@ The application allows you to research the fundamentals and general company info
   1. First, you can search by either the stock ticker or company name.
   * If there is only one security that matches the query, it will automatically load the available information.
   * If there are multiple matches to your search, you can read the matches and select the one you were looking for.
-    - As an example, searching "Apple" returns Apple Inc. (iPhone maker) as well as Apple Hospitality REIT and other companies including "Apple as part of it's name.  Searching AAPL automatically returns Apple Inc. stock info.
+    - As an example, searching "Apple" returns Apple Inc. (iPhone maker) as well as Apple Hospitality REIT and other companies including "Apple" as part of it's name.  Searching AAPL automatically returns Apple Inc. stock info.
     
   2. Once the info is provided, use the information provided to determine whether you want to invest or not.
   
