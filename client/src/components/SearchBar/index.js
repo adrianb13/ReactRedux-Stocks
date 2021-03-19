@@ -136,14 +136,23 @@ class SearchBar extends React.Component{
   render(){
     return (
       <div>
+        
+        <div className="sbLinkBox">
+          <div className="brokerLink">
+            <Link to="/brokers">
+              <div>Need A Broker? Comparison Here!</div>
+            </Link>
+          </div>
+          <div className="brokerLink">
+            <Link to="/market-news">
+              <div>Want The Latest Market News?</div>
+            </Link>
+          </div>
+        </div>
+        
         <div className="sbSearchBox" onChange={this.handleInputChange}>
           <button className="sbSearch" type="submit" onClick={this.findSymbol}>Search</button>
           <input className="sbSearchInput" type="text" name="query" id="query" onKeyDown={this.enterSubmit} placeholder="Name or Ticker Symbol"></input>
-        </div>
-        <div className="brokerLink">
-          <Link to="/brokers">
-            <div >Need A Broker? Click Here!!!</div>
-          </Link>
         </div>
 
         {this.state.searchBox ? (

@@ -71,10 +71,16 @@
   color: red;
   font-weight: bold;
 }
+.sbLinkBox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .brokerLink{
-  width: 300px;
+  width: 340px;
   text-align: center;
-  margin: 15px auto;
+  margin: 0 auto 15px;
 }
 .brokerLink a:link, .brokerLink a:visited, .brokerLink a:hover, .brokerLink a:active{
   color: orange;

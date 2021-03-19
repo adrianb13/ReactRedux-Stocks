@@ -66,7 +66,7 @@ const rootReducer = ( state = initialState, action ) => {
       return Object.assign({}, state, {
         chartInfo: action.chartInfo
       });
-    case types.STOCK_NAME_SUCCESS:
+    case types.STOCK_NEWS_SUCCESS:
       return Object.assign({}, state, {
         news: action.news
       });

@@ -13,6 +13,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={StocksSearch} />
         <Route exact path="/brokers" component={Brokers} />
+        <Route exact path="/market-news" component={MarketNews} />
         <Route exact path="/:id" component={StockPage} />
         <Route component= {StocksSearch} />
       </Switch>
