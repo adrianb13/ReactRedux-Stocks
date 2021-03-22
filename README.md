@@ -27,5 +27,6 @@ The application allows you to research the fundamentals and general company info
 
 ### Potential Updates & Possible Commercialization
   1. I am looking to add a "News" page for the market and potentially individual stocks.  Still looking for an API that provides a complete list of up-to-date articles for each stock. I want to try and provide a broad news page for individual stocks that balance the bias on both sides for "bulls" and "bears".
+  * UPDATE: Market News page added for general daily market information!  Individual stock page still in the works again with the intention for a broader perspective on individual companies.
   
   2. For commercial purposes, the APIs do allow for real-time ticker updates and more in-depth chart breakdowns when using the commercial paid versions. This would be the equivalent of creating a app exactly like Robinhood or WeBull.  This would also require scaling of servers and data processing, but the potential is there.
