@@ -11,13 +11,6 @@ import SearchBar from "../SearchBar";
 
 class StocksSearch extends React.Component {
   state = {
-    query: null,
-    bestMatches: null,
-    ticker: null,
-    tickerName: null,
-    currentStockQuote: null,
-    currentStockInfo: null,
-    searchBox: false,
     searchIntro: true
   }
 
@@ -139,10 +132,6 @@ class StocksSearch extends React.Component {
 
 const mapStateToProps = (state) => {
   return { 
-    matches: state.matches,
-    quote: state.quote,
-    stockInfo: state.stockInfo,
-    stockName: state.stockName,
     timing: state.timing
   }
 }
