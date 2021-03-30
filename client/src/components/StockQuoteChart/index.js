@@ -23,13 +23,6 @@ const StockQuoteChart = (props) => {
           <tr>
             <td style={{fontWeight: "bold"}}>{props.ticker}</td>
             <td>{props.tickerName}</td>
-            {/* <td>${props.currentStockQuote["05. price"].slice(0, -2)}</td>
-            <td>{props.currentStockQuote["09. change"].slice(0, -2)}</td>
-            <td>{props.currentStockQuote["10. change percent"].slice(0, -2)}</td>
-            <td>${props.currentStockQuote["02. open"].slice(0, -2)}</td>
-            <td>${props.currentStockQuote["08. previous close"].slice(0, -2)}</td>
-            <td>${props.currentStockQuote["03. high"].slice(0, -2)}</td>
-            <td>${props.currentStockQuote["04. low"].slice(0, -2)}</td> */}
             <td>${props.currentStockQuote["c"].toFixed(2)}</td>
             <td>{props.currentStockChange}</td>
             <td>{props.currentStockPercent}</td>
@@ -37,6 +30,13 @@ const StockQuoteChart = (props) => {
             <td>${props.currentStockQuote["pc"].toFixed(2)}</td>
             <td>${props.currentStockQuote["h"].toFixed(2)}</td>
             <td>${props.currentStockQuote["l"].toFixed(2)}</td>
+            {/* <td>${props.currentStockQuote["05. price"].slice(0, -2)}</td>
+            <td>{props.currentStockQuote["09. change"].slice(0, -2)}</td>
+            <td>{props.currentStockQuote["10. change percent"].slice(0, -2)}</td>
+            <td>${props.currentStockQuote["02. open"].slice(0, -2)}</td>
+            <td>${props.currentStockQuote["08. previous close"].slice(0, -2)}</td>
+            <td>${props.currentStockQuote["03. high"].slice(0, -2)}</td>
+            <td>${props.currentStockQuote["04. low"].slice(0, -2)}</td> */}
           </tr>
         </tbody>
       </table>

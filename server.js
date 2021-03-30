@@ -31,8 +31,12 @@ app.get("*", function(req, res){
 })
 
 //Connection to Server as well as MySQL
-db.sequelize.sync(syncOptions).then(() => {
+/* db.sequelize.sync(syncOptions).then(() => {
   app.listen(PORT, () => {
     console.log(`🌎 ==> API server now on port http://localhost:${PORT}`);
   });
+}); */
+
+app.listen(PORT, () => {
+  console.log(`🌎 ==> API server now on port http://localhost:${PORT}`);
 });
