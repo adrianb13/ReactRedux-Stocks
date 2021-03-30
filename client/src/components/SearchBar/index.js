@@ -52,7 +52,6 @@ class SearchBar extends React.Component{
       }, () => {
         this.findSymbol();
       })
-      
     }
   }
 
